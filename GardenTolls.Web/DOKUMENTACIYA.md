@@ -187,7 +187,7 @@ GardenTolls/
 ---
 
 
-## Як запустити веб-сайт
+## Як запустити вебсайт
 
 ```bash
 cd GardenTolls.Web
