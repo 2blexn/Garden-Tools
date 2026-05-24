@@ -1,124 +1,124 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/admin.4qpsv632cu.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"4qpsv632cu"},{"Name":"integrity","Value":"sha256-xIeTQSh5Gt\u002B7J8OZLYtHK\u002BZerGemPBnEWy01uKm5Abc="},{"Name":"label","Value":"_content/GardenTolls.Web/css/admin.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4434"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022xIeTQSh5Gt\u002B7J8OZLYtHK\u002BZerGemPBnEWy01uKm5Abc=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:06:40 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/admin.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-xIeTQSh5Gt\u002B7J8OZLYtHK\u002BZerGemPBnEWy01uKm5Abc="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4434"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022xIeTQSh5Gt\u002B7J8OZLYtHK\u002BZerGemPBnEWy01uKm5Abc=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:06:40 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-wqYTcaGBW6hXzCq5aChoCNG2hFiznSz4pKS9wcS4Hbs="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4360"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022wqYTcaGBW6hXzCq5aChoCNG2hFiznSz4pKS9wcS4Hbs=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:41 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/admin.i4uh0hthfz.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"i4uh0hthfz"},{"Name":"integrity","Value":"sha256-wqYTcaGBW6hXzCq5aChoCNG2hFiznSz4pKS9wcS4Hbs="},{"Name":"label","Value":"_content/GardenTolls.Web/css/admin.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4360"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022wqYTcaGBW6hXzCq5aChoCNG2hFiznSz4pKS9wcS4Hbs=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:41 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/auth.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\auth.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-TBRRz5iAcIbGbV53dd/nqq30CVo/dLy0KGcKIST1HE8="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4961"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022TBRRz5iAcIbGbV53dd/nqq30CVo/dLy0KGcKIST1HE8=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 18:00:40 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-3hJBrJbK6GMtM90K3fgGc3k7aw97d42dlpTrrZmRGUo="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4896"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00223hJBrJbK6GMtM90K3fgGc3k7aw97d42dlpTrrZmRGUo=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:30 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/auth.ov4s0d1msz.css">
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/auth.qxigney7rl.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\auth.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ov4s0d1msz"},{"Name":"integrity","Value":"sha256-TBRRz5iAcIbGbV53dd/nqq30CVo/dLy0KGcKIST1HE8="},{"Name":"label","Value":"_content/GardenTolls.Web/css/auth.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4961"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022TBRRz5iAcIbGbV53dd/nqq30CVo/dLy0KGcKIST1HE8=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 18:00:40 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qxigney7rl"},{"Name":"integrity","Value":"sha256-3hJBrJbK6GMtM90K3fgGc3k7aw97d42dlpTrrZmRGUo="},{"Name":"label","Value":"_content/GardenTolls.Web/css/auth.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4896"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00223hJBrJbK6GMtM90K3fgGc3k7aw97d42dlpTrrZmRGUo=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:30 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/cart.48arg1n9wg.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\cart.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"48arg1n9wg"},{"Name":"integrity","Value":"sha256-fC/dCbUxcOP72/TBlbF3Au\u002BGNnTWtpE2PhLAAi//hu4="},{"Name":"label","Value":"_content/GardenTolls.Web/css/cart.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5611"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022fC/dCbUxcOP72/TBlbF3Au\u002BGNnTWtpE2PhLAAi//hu4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:20 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/cart.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\cart.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-bWdFc/M0vY70dKQnuIk\u002BSV2/4IhVJHcrn1C8hBwiXj0="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5666"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022bWdFc/M0vY70dKQnuIk\u002BSV2/4IhVJHcrn1C8hBwiXj0=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 15:00:53 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/cart.v9jw76ftth.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\cart.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"v9jw76ftth"},{"Name":"integrity","Value":"sha256-bWdFc/M0vY70dKQnuIk\u002BSV2/4IhVJHcrn1C8hBwiXj0="},{"Name":"label","Value":"_content/GardenTolls.Web/css/cart.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5666"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022bWdFc/M0vY70dKQnuIk\u002BSV2/4IhVJHcrn1C8hBwiXj0=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 15:00:53 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-fC/dCbUxcOP72/TBlbF3Au\u002BGNnTWtpE2PhLAAi//hu4="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5611"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022fC/dCbUxcOP72/TBlbF3Au\u002BGNnTWtpE2PhLAAi//hu4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:20 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/catalog.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\catalog.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-VG7PMyTf2e7ycRvIOGvU5G\u002BTLocoVRjYGcTo9zMEAPk="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"7962"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VG7PMyTf2e7ycRvIOGvU5G\u002BTLocoVRjYGcTo9zMEAPk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 19:44:37 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-HFkuSctoTy0lwjrXPYLAKkaJAPkEvd/LTN9J/XAe9/w="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"7883"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022HFkuSctoTy0lwjrXPYLAKkaJAPkEvd/LTN9J/XAe9/w=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/catalog.oxzjhlzgo1.css">
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/catalog.kqm4xfjyze.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\catalog.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"oxzjhlzgo1"},{"Name":"integrity","Value":"sha256-VG7PMyTf2e7ycRvIOGvU5G\u002BTLocoVRjYGcTo9zMEAPk="},{"Name":"label","Value":"_content/GardenTolls.Web/css/catalog.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"7962"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VG7PMyTf2e7ycRvIOGvU5G\u002BTLocoVRjYGcTo9zMEAPk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 19:44:37 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"kqm4xfjyze"},{"Name":"integrity","Value":"sha256-HFkuSctoTy0lwjrXPYLAKkaJAPkEvd/LTN9J/XAe9/w="},{"Name":"label","Value":"_content/GardenTolls.Web/css/catalog.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"7883"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022HFkuSctoTy0lwjrXPYLAKkaJAPkEvd/LTN9J/XAe9/w=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:29:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/checkout.0szb2cf5uz.css">
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/checkout.byp6rvzybh.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\checkout.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"0szb2cf5uz"},{"Name":"integrity","Value":"sha256-IFSxXJp2d3P0bGaZ6sxkuIFlJ6V/CqAzZsJGMClIcm4="},{"Name":"label","Value":"_content/GardenTolls.Web/css/checkout.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9012"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022IFSxXJp2d3P0bGaZ6sxkuIFlJ6V/CqAzZsJGMClIcm4=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 15:57:31 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"byp6rvzybh"},{"Name":"integrity","Value":"sha256-4091YVEszNdy4g7eSllscoBCSWekm3IkIyEM4cf7Gm4="},{"Name":"label","Value":"_content/GardenTolls.Web/css/checkout.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8938"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00224091YVEszNdy4g7eSllscoBCSWekm3IkIyEM4cf7Gm4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:27:47 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/checkout.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\checkout.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-IFSxXJp2d3P0bGaZ6sxkuIFlJ6V/CqAzZsJGMClIcm4="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9012"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022IFSxXJp2d3P0bGaZ6sxkuIFlJ6V/CqAzZsJGMClIcm4=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 15:57:31 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-4091YVEszNdy4g7eSllscoBCSWekm3IkIyEM4cf7Gm4="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8938"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00224091YVEszNdy4g7eSllscoBCSWekm3IkIyEM4cf7Gm4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:27:47 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/header.3w5nqveoyj.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"3w5nqveoyj"},{"Name":"integrity","Value":"sha256-k5PLVGXgdMln8LTEXqczcoeaIdyl5dPhjSFrBVDpfO0="},{"Name":"label","Value":"_content/GardenTolls.Web/css/header.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4985"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022k5PLVGXgdMln8LTEXqczcoeaIdyl5dPhjSFrBVDpfO0=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:27:40 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/header.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-IT7HEIRh2ViwRNnPBCI1PQjjTgvLAcSj\u002Bxj6d0itFCk="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5170"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022IT7HEIRh2ViwRNnPBCI1PQjjTgvLAcSj\u002Bxj6d0itFCk=\u0022"},{"Name":"Last-Modified","Value":"Mon, 12 May 2025 14:37:30 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-k5PLVGXgdMln8LTEXqczcoeaIdyl5dPhjSFrBVDpfO0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4985"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022k5PLVGXgdMln8LTEXqczcoeaIdyl5dPhjSFrBVDpfO0=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:27:40 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/header.jfzml42643.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"jfzml42643"},{"Name":"integrity","Value":"sha256-IT7HEIRh2ViwRNnPBCI1PQjjTgvLAcSj\u002Bxj6d0itFCk="},{"Name":"label","Value":"_content/GardenTolls.Web/css/header.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5170"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022IT7HEIRh2ViwRNnPBCI1PQjjTgvLAcSj\u002Bxj6d0itFCk=\u0022"},{"Name":"Last-Modified","Value":"Mon, 12 May 2025 14:37:30 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/hero-banner.96ijf77s0v.css">
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/hero-banner.3gtpdjsf2a.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\hero-banner.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"96ijf77s0v"},{"Name":"integrity","Value":"sha256-wT1toR18I58gsJclJgXywZP1RS9kY3q5qHoF302AHgM="},{"Name":"label","Value":"_content/GardenTolls.Web/css/hero-banner.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4053"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022wT1toR18I58gsJclJgXywZP1RS9kY3q5qHoF302AHgM=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:34:22 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"3gtpdjsf2a"},{"Name":"integrity","Value":"sha256-UzpP7FSeWh8Geh7hJ2O\u002Bsdi/lCVE8nKptqyXdAtUW\u002BU="},{"Name":"label","Value":"_content/GardenTolls.Web/css/hero-banner.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3604"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022UzpP7FSeWh8Geh7hJ2O\u002Bsdi/lCVE8nKptqyXdAtUW\u002BU=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:17:41 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/hero-banner.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\hero-banner.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-wT1toR18I58gsJclJgXywZP1RS9kY3q5qHoF302AHgM="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4053"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022wT1toR18I58gsJclJgXywZP1RS9kY3q5qHoF302AHgM=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:34:22 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-UzpP7FSeWh8Geh7hJ2O\u002Bsdi/lCVE8nKptqyXdAtUW\u002BU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3604"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022UzpP7FSeWh8Geh7hJ2O\u002Bsdi/lCVE8nKptqyXdAtUW\u002BU=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:17:41 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/product-details.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\product-details.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-rsfcqd1zLfkg08S5Xh\u002BnQF5J4mwI702gojcBdlyualk="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8959"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022rsfcqd1zLfkg08S5Xh\u002BnQF5J4mwI702gojcBdlyualk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:07:50 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-sBM7QjBQfqlvAuI7E0WoetS0z1dDKzm9H3xoxdOO4r8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8893"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022sBM7QjBQfqlvAuI7E0WoetS0z1dDKzm9H3xoxdOO4r8=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:28:26 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/product-details.qptxzckzce.css">
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/product-details.kzfftarb3q.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\product-details.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qptxzckzce"},{"Name":"integrity","Value":"sha256-rsfcqd1zLfkg08S5Xh\u002BnQF5J4mwI702gojcBdlyualk="},{"Name":"label","Value":"_content/GardenTolls.Web/css/product-details.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8959"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022rsfcqd1zLfkg08S5Xh\u002BnQF5J4mwI702gojcBdlyualk=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:07:50 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/site-pages.51xm9o8go5.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site-pages.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"51xm9o8go5"},{"Name":"integrity","Value":"sha256-udlOoC4fbt48jU3HLoiV/0DF8fQRz5OwnRmEjq88oRA="},{"Name":"label","Value":"_content/GardenTolls.Web/css/site-pages.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9581"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022udlOoC4fbt48jU3HLoiV/0DF8fQRz5OwnRmEjq88oRA=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 18:54:17 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"kzfftarb3q"},{"Name":"integrity","Value":"sha256-sBM7QjBQfqlvAuI7E0WoetS0z1dDKzm9H3xoxdOO4r8="},{"Name":"label","Value":"_content/GardenTolls.Web/css/product-details.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8893"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022sBM7QjBQfqlvAuI7E0WoetS0z1dDKzm9H3xoxdOO4r8=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:28:26 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/site-pages.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site-pages.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-udlOoC4fbt48jU3HLoiV/0DF8fQRz5OwnRmEjq88oRA="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9581"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022udlOoC4fbt48jU3HLoiV/0DF8fQRz5OwnRmEjq88oRA=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 18:54:17 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-B/RNdWnwhb69WvsVC36MnJAWD\u002BLGZTapc/vUVu3EnY0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9494"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022B/RNdWnwhb69WvsVC36MnJAWD\u002BLGZTapc/vUVu3EnY0=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:28:18 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/site-pages.dr2kl32276.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site-pages.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"dr2kl32276"},{"Name":"integrity","Value":"sha256-B/RNdWnwhb69WvsVC36MnJAWD\u002BLGZTapc/vUVu3EnY0="},{"Name":"label","Value":"_content/GardenTolls.Web/css/site-pages.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9494"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022B/RNdWnwhb69WvsVC36MnJAWD\u002BLGZTapc/vUVu3EnY0=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:28:18 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/site.7j1fsrqie4.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"7j1fsrqie4"},{"Name":"integrity","Value":"sha256-g73dveCi2U5\u002BunjqPOXQ7Bdtdfn9abBu5gh4K5Kwyg8="},{"Name":"label","Value":"_content/GardenTolls.Web/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9792"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022g73dveCi2U5\u002BunjqPOXQ7Bdtdfn9abBu5gh4K5Kwyg8=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:28:05 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-CrmmAkOTeGO2o5hhrW3uEgo16ofa1ecPNe/UAYBygyo="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9806"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022CrmmAkOTeGO2o5hhrW3uEgo16ofa1ecPNe/UAYBygyo=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:34:06 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/css/site.mwihxnhlne.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"mwihxnhlne"},{"Name":"integrity","Value":"sha256-CrmmAkOTeGO2o5hhrW3uEgo16ofa1ecPNe/UAYBygyo="},{"Name":"label","Value":"_content/GardenTolls.Web/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"9806"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022CrmmAkOTeGO2o5hhrW3uEgo16ofa1ecPNe/UAYBygyo=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 20:34:06 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-g73dveCi2U5\u002BunjqPOXQ7Bdtdfn9abBu5gh4K5Kwyg8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"9792"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022g73dveCi2U5\u002BunjqPOXQ7Bdtdfn9abBu5gh4K5Kwyg8=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 08:28:05 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/favicon.61n19gt1b8.ico">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))</AssetFile>
@@ -132,17 +132,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Jtxf9L\u002B5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"5430"},{"Name":"Content-Type","Value":"image/x-icon"},{"Name":"ETag","Value":"\u0022Jtxf9L\u002B5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 11:14:26 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/GardenTolls.Web.8brv25qiep.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.8brv25qiep.bundle.scp.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8brv25qiep"},{"Name":"integrity","Value":"sha256-BDKpTnsjH1NEL6NRC5aAtShvkedkx4TeaIwrl/LoO\u002BQ="},{"Name":"label","Value":"_content/GardenTolls.Web/GardenTolls.Web.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1133"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022BDKpTnsjH1NEL6NRC5aAtShvkedkx4TeaIwrl/LoO\u002BQ=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 11:21:57 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/GardenTolls.Web.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.8brv25qiep.bundle.scp.css'))</AssetFile>
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.k8vr2sfa21.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-BDKpTnsjH1NEL6NRC5aAtShvkedkx4TeaIwrl/LoO\u002BQ="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1133"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022BDKpTnsjH1NEL6NRC5aAtShvkedkx4TeaIwrl/LoO\u002BQ=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 11:21:57 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-HIdIAySUeMSe7ANnyV8Q\u002BteWeefm36NzRPxXIh605z4="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"937"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022HIdIAySUeMSe7ANnyV8Q\u002BteWeefm36NzRPxXIh605z4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 07:53:53 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/GardenTolls.Web.k8vr2sfa21.bundle.scp.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.k8vr2sfa21.bundle.scp.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"k8vr2sfa21"},{"Name":"integrity","Value":"sha256-HIdIAySUeMSe7ANnyV8Q\u002BteWeefm36NzRPxXIh605z4="},{"Name":"label","Value":"_content/GardenTolls.Web/GardenTolls.Web.bundle.scp.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"937"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022HIdIAySUeMSe7ANnyV8Q\u002BteWeefm36NzRPxXIh605z4=\u0022"},{"Name":"Last-Modified","Value":"Sun, 24 May 2026 07:53:53 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/logo.m4221klq9c.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\logo.png'))</AssetFile>
@@ -167,54 +167,6 @@
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-OdJX7WPBeQkeq0mL8lZdL5v7gmSaEiAysbsbmfXiueY="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"271"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022OdJX7WPBeQkeq0mL8lZdL5v7gmSaEiAysbsbmfXiueY=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 15:02:44 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_329a004.ojqdsusson.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_329a004.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ojqdsusson"},{"Name":"integrity","Value":"sha256-pFtPJH6xfU9NtTPVX4knQPRqeQzhmbxjXOyOqcAgqLo="},{"Name":"label","Value":"_content/GardenTolls.Web/images/Plottersvg_flowers_329a004.svg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"38641"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022pFtPJH6xfU9NtTPVX4knQPRqeQzhmbxjXOyOqcAgqLo=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:24:57 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_329a004.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_329a004.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-pFtPJH6xfU9NtTPVX4knQPRqeQzhmbxjXOyOqcAgqLo="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"38641"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022pFtPJH6xfU9NtTPVX4knQPRqeQzhmbxjXOyOqcAgqLo=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:24:57 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_3fdd9ed.p1c1y6ete7.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_3fdd9ed.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"p1c1y6ete7"},{"Name":"integrity","Value":"sha256-w7Idiskjtt6Y58\u002BctV5CRNRWGWRz1UgI9PpZ8VNfwVA="},{"Name":"label","Value":"_content/GardenTolls.Web/images/Plottersvg_flowers_3fdd9ed.svg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"25545"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022w7Idiskjtt6Y58\u002BctV5CRNRWGWRz1UgI9PpZ8VNfwVA=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:32:15 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_3fdd9ed.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_3fdd9ed.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-w7Idiskjtt6Y58\u002BctV5CRNRWGWRz1UgI9PpZ8VNfwVA="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"25545"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u0022w7Idiskjtt6Y58\u002BctV5CRNRWGWRz1UgI9PpZ8VNfwVA=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:32:15 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_4adf767.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_4adf767.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-8bx5phndirU2xxmhg48080esQBU\u002BsgiLV1B95iSjaLE="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"36519"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u00228bx5phndirU2xxmhg48080esQBU\u002BsgiLV1B95iSjaLE=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:03:41 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_4adf767.x4gl8o9acz.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_4adf767.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"x4gl8o9acz"},{"Name":"integrity","Value":"sha256-8bx5phndirU2xxmhg48080esQBU\u002BsgiLV1B95iSjaLE="},{"Name":"label","Value":"_content/GardenTolls.Web/images/Plottersvg_flowers_4adf767.svg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"36519"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u00228bx5phndirU2xxmhg48080esQBU\u002BsgiLV1B95iSjaLE=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:03:41 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_5734ed3.66hpyf397y.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_5734ed3.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"66hpyf397y"},{"Name":"integrity","Value":"sha256-0m5aoshWaV\u002BJ8z0tDNhmNjNBpWa/tZmso8H1GdK1s1M="},{"Name":"label","Value":"_content/GardenTolls.Web/images/Plottersvg_flowers_5734ed3.svg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"36519"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u00220m5aoshWaV\u002BJ8z0tDNhmNjNBpWa/tZmso8H1GdK1s1M=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:22:27 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/images/Plottersvg_flowers_5734ed3.svg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_5734ed3.svg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-0m5aoshWaV\u002BJ8z0tDNhmNjNBpWa/tZmso8H1GdK1s1M="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"36519"},{"Name":"Content-Type","Value":"image/svg\u002Bxml"},{"Name":"ETag","Value":"\u00220m5aoshWaV\u002BJ8z0tDNhmNjNBpWa/tZmso8H1GdK1s1M=\u0022"},{"Name":"Last-Modified","Value":"Sat, 23 May 2026 12:22:27 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/GardenTolls.Web/js/site.g3jwzo19jf.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>

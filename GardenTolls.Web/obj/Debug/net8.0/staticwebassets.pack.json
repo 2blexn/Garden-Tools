@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GardenTolls.Web.bundle.scp.css",
-      "PackagePath": "staticwebassets\\GardenTolls.Web.8brv25qiep.bundle.scp.css"
+      "PackagePath": "staticwebassets\\GardenTolls.Web.k8vr2sfa21.bundle.scp.css"
     },
     {
       "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\wwwroot\\css\\admin.css",
@@ -47,22 +47,6 @@
     {
       "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
-    },
-    {
-      "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\wwwroot\\images\\Plottersvg_flowers_329a004.svg",
-      "PackagePath": "staticwebassets\\images\\Plottersvg_flowers_329a004.svg"
-    },
-    {
-      "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\wwwroot\\images\\Plottersvg_flowers_3fdd9ed.svg",
-      "PackagePath": "staticwebassets\\images\\Plottersvg_flowers_3fdd9ed.svg"
-    },
-    {
-      "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\wwwroot\\images\\Plottersvg_flowers_4adf767.svg",
-      "PackagePath": "staticwebassets\\images\\Plottersvg_flowers_4adf767.svg"
-    },
-    {
-      "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\wwwroot\\images\\Plottersvg_flowers_5734ed3.svg",
-      "PackagePath": "staticwebassets\\images\\Plottersvg_flowers_5734ed3.svg"
     },
     {
       "Id": "E:\\308\\GardenTolls\\GardenTolls.Web\\wwwroot\\images\\logo.png",

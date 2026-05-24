@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>4qpsv632cu</Fingerprint>
-      <Integrity>xIeTQSh5Gt+7J8OZLYtHK+ZerGemPBnEWy01uKm5Abc=</Integrity>
+      <Fingerprint>i4uh0hthfz</Fingerprint>
+      <Integrity>wqYTcaGBW6hXzCq5aChoCNG2hFiznSz4pKS9wcS4Hbs=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin.css'))</OriginalItemSpec>
@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ov4s0d1msz</Fingerprint>
-      <Integrity>TBRRz5iAcIbGbV53dd/nqq30CVo/dLy0KGcKIST1HE8=</Integrity>
+      <Fingerprint>qxigney7rl</Fingerprint>
+      <Integrity>3hJBrJbK6GMtM90K3fgGc3k7aw97d42dlpTrrZmRGUo=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\auth.css'))</OriginalItemSpec>
@@ -48,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>v9jw76ftth</Fingerprint>
-      <Integrity>bWdFc/M0vY70dKQnuIk+SV2/4IhVJHcrn1C8hBwiXj0=</Integrity>
+      <Fingerprint>48arg1n9wg</Fingerprint>
+      <Integrity>fC/dCbUxcOP72/TBlbF3Au+GNnTWtpE2PhLAAi//hu4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\cart.css'))</OriginalItemSpec>
@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>oxzjhlzgo1</Fingerprint>
-      <Integrity>VG7PMyTf2e7ycRvIOGvU5G+TLocoVRjYGcTo9zMEAPk=</Integrity>
+      <Fingerprint>kqm4xfjyze</Fingerprint>
+      <Integrity>HFkuSctoTy0lwjrXPYLAKkaJAPkEvd/LTN9J/XAe9/w=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\catalog.css'))</OriginalItemSpec>
@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>0szb2cf5uz</Fingerprint>
-      <Integrity>IFSxXJp2d3P0bGaZ6sxkuIFlJ6V/CqAzZsJGMClIcm4=</Integrity>
+      <Fingerprint>byp6rvzybh</Fingerprint>
+      <Integrity>4091YVEszNdy4g7eSllscoBCSWekm3IkIyEM4cf7Gm4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\checkout.css'))</OriginalItemSpec>
@@ -102,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>jfzml42643</Fingerprint>
-      <Integrity>IT7HEIRh2ViwRNnPBCI1PQjjTgvLAcSj+xj6d0itFCk=</Integrity>
+      <Fingerprint>3w5nqveoyj</Fingerprint>
+      <Integrity>k5PLVGXgdMln8LTEXqczcoeaIdyl5dPhjSFrBVDpfO0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</OriginalItemSpec>
@@ -120,8 +120,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>96ijf77s0v</Fingerprint>
-      <Integrity>wT1toR18I58gsJclJgXywZP1RS9kY3q5qHoF302AHgM=</Integrity>
+      <Fingerprint>3gtpdjsf2a</Fingerprint>
+      <Integrity>UzpP7FSeWh8Geh7hJ2O+sdi/lCVE8nKptqyXdAtUW+U=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\hero-banner.css'))</OriginalItemSpec>
@@ -138,8 +138,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qptxzckzce</Fingerprint>
-      <Integrity>rsfcqd1zLfkg08S5Xh+nQF5J4mwI702gojcBdlyualk=</Integrity>
+      <Fingerprint>kzfftarb3q</Fingerprint>
+      <Integrity>sBM7QjBQfqlvAuI7E0WoetS0z1dDKzm9H3xoxdOO4r8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\product-details.css'))</OriginalItemSpec>
@@ -156,8 +156,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>mwihxnhlne</Fingerprint>
-      <Integrity>CrmmAkOTeGO2o5hhrW3uEgo16ofa1ecPNe/UAYBygyo=</Integrity>
+      <Fingerprint>7j1fsrqie4</Fingerprint>
+      <Integrity>g73dveCi2U5+unjqPOXQ7Bdtdfn9abBu5gh4K5Kwyg8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
@@ -174,8 +174,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>51xm9o8go5</Fingerprint>
-      <Integrity>udlOoC4fbt48jU3HLoiV/0DF8fQRz5OwnRmEjq88oRA=</Integrity>
+      <Fingerprint>dr2kl32276</Fingerprint>
+      <Integrity>B/RNdWnwhb69WvsVC36MnJAWD+LGZTapc/vUVu3EnY0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site-pages.css'))</OriginalItemSpec>
@@ -198,23 +198,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.8brv25qiep.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.k8vr2sfa21.bundle.scp.css'))">
       <SourceType>Package</SourceType>
       <SourceId>GardenTolls.Web</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/GardenTolls.Web</BasePath>
-      <RelativePath>GardenTolls.Web.8brv25qiep.bundle.scp.css</RelativePath>
+      <RelativePath>GardenTolls.Web.k8vr2sfa21.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>8brv25qiep</Fingerprint>
-      <Integrity>BDKpTnsjH1NEL6NRC5aAtShvkedkx4TeaIwrl/LoO+Q=</Integrity>
+      <Fingerprint>k8vr2sfa21</Fingerprint>
+      <Integrity>HIdIAySUeMSe7ANnyV8Q+teWeefm36NzRPxXIh605z4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.8brv25qiep.bundle.scp.css'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\GardenTolls.Web.k8vr2sfa21.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\logo.png'))">
       <SourceType>Package</SourceType>
@@ -251,78 +251,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\placeholder.svg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_329a004.svg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>GardenTolls.Web</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/GardenTolls.Web</BasePath>
-      <RelativePath>images/Plottersvg_flowers_329a004.svg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ojqdsusson</Fingerprint>
-      <Integrity>pFtPJH6xfU9NtTPVX4knQPRqeQzhmbxjXOyOqcAgqLo=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_329a004.svg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_3fdd9ed.svg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>GardenTolls.Web</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/GardenTolls.Web</BasePath>
-      <RelativePath>images/Plottersvg_flowers_3fdd9ed.svg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>p1c1y6ete7</Fingerprint>
-      <Integrity>w7Idiskjtt6Y58+ctV5CRNRWGWRz1UgI9PpZ8VNfwVA=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_3fdd9ed.svg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_4adf767.svg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>GardenTolls.Web</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/GardenTolls.Web</BasePath>
-      <RelativePath>images/Plottersvg_flowers_4adf767.svg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>x4gl8o9acz</Fingerprint>
-      <Integrity>8bx5phndirU2xxmhg48080esQBU+sgiLV1B95iSjaLE=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_4adf767.svg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_5734ed3.svg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>GardenTolls.Web</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/GardenTolls.Web</BasePath>
-      <RelativePath>images/Plottersvg_flowers_5734ed3.svg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>66hpyf397y</Fingerprint>
-      <Integrity>0m5aoshWaV+J8z0tDNhmNjNBpWa/tZmso8H1GdK1s1M=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Plottersvg_flowers_5734ed3.svg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))">
       <SourceType>Package</SourceType>

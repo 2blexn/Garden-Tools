@@ -59,15 +59,30 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("DbSeeder");
+    var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+    var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
+    var bootstrapLogger = loggerFactory.CreateLogger("DatabaseBootstrap");
+    var seedLogger = loggerFactory.CreateLogger("DbSeeder");
+
     try
     {
+        await DatabaseBootstrap.EnsureDatabaseAsync(config, bootstrapLogger);
+    }
+    catch (Exception ex)
+    {
+        bootstrapLogger.LogCritical(ex,
+            "Не вдалося створити базу даних з BACPAC. Потрібен SQL Server або LocalDB. Див. README.md");
+        throw;
+    }
+
+    try
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         await DbSeeder.SeedAsync(db);
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Не вдалося виконати початкове наповнення БД (акції тощо)");
+        seedLogger.LogError(ex, "Не вдалося виконати додаткове наповнення БД");
     }
 }
 

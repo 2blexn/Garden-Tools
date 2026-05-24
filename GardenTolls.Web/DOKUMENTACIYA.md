@@ -3,7 +3,7 @@
 ```
 GardenTolls/
 ├── GardenTolls.Web/          ← основний сайт (ASP.NET Core 8 MVC)
-└── (SQL Server, БД GardenTools)
+└── (SQL Server, БД GardenToolsDB)
 ```
 
 **GardenTolls.Web**: сервер рендерить HTML-сторінки, кошик і wishlist зберігаються в **сесії** браузера, дані товарів/замовлень — у **SQL Server**.
@@ -191,9 +191,13 @@ GardenTolls/
 
 ```bash
 cd GardenTolls.Web
-dotnet watch run або dotnet run
+dotnet run
 ```
 
-Зауваж, що після зміни коду `dotnet watch` перезбирає проєкт автоматично, а `dotnet run` потрібно зупинити і запустити знову.
+**Базу створювати вручну не потрібно.** При першому запуску, якщо `GardenTools` ще немає, імпортується `Database/GardenTools.bacpac` (таблиці, дані, тригери). Деталі — у `README.md`.
+
+- За замовчуванням: SQL Server **LocalDB** `(localdb)\mssqllocaldb`
+- SQL Express: `appsettings.Development.json`
+- Оновити знімок БД: `scripts/Export-Database.ps1`
 
 ---
