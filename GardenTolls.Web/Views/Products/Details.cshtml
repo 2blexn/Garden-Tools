@@ -1,0 +1,254 @@
+@model ProductDetailsViewModel
+@{
+    ViewData["Title"] = Model.Name;
+    var imgSrc = !string.IsNullOrEmpty(Model.ImageBase64)
+        ? $"data:image/jpeg;base64,{Model.ImageBase64}"
+        : "/images/placeholder.svg";
+    var rating = Model.AverageRating ?? 0;
+    var filledStars = (int)Math.Round(rating);
+    var returnUrl = Url.Action("Details", "Products", new { id = Model.ProductId, promoId = Model.FromPromotionId });
+    var cartIds = ViewBag.CartProductIds as HashSet<int> ?? [];
+    var inCart = cartIds.Contains(Model.ProductId);
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/product-details.css" asp-append-version="true" />
+}
+
+<div class="product-detail-page">
+    @if (Model.FromPromotionId.HasValue)
+    {
+        <nav aria-label="breadcrumb" class="page-breadcrumb mb-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Promotions">Усі акції</a></li>
+                <li class="breadcrumb-item">
+                    <a asp-controller="Promotions" asp-action="Details" asp-route-id="@Model.FromPromotionId">@(Model.FromPromotionName ?? "Акція")</a>
+                </li>
+                <li class="breadcrumb-item active">@Model.Name</li>
+            </ol>
+        </nav>
+    }
+
+    <div class="product-hero">
+        <div class="product-gallery">
+            <img src="@imgSrc" alt="@Model.Name" onerror="this.src='/images/placeholder.svg'" />
+        </div>
+        <div class="product-info-block">
+            <h1 class="product-detail-name">@Model.Name</h1>
+            <div class="product-rating-wrap">
+                @for (var s = 1; s <= 5; s++)
+                {
+                    <span class="@(s <= filledStars ? "product-rating-stars" : "text-secondary")">★</span>
+                }
+                <span class="product-rating-value">
+                    @if (Model.AverageRating.HasValue)
+                    {
+                        @($"({Model.AverageRating.Value:0.0})")
+                    }
+                    else
+                    {
+                        @("(Немає оцінок)")
+                    }
+                </span>
+            </div>
+            <div class="product-detail-price mb-0">
+                @if (Model.DiscountedPrice.HasValue)
+                {
+                    <span class="product-detail-price-old">@Model.UnitPrice.ToString("N2") грн.</span>
+                    <span>@Model.DiscountedPrice.Value.ToString("N2") грн.</span>
+                }
+                else
+                {
+                    <span>@Model.DisplayPrice.ToString("N2") грн.</span>
+                }
+            </div>
+            <p class="product-detail-description">@Model.Description</p>
+            <form asp-controller="Cart" asp-action="ToggleCart" method="post" class="d-inline">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="productId" value="@Model.ProductId" />
+                <input type="hidden" name="returnUrl" value="@returnUrl" />
+                <button type="submit" class="btn btn-add-to-cart @(inCart ? "btn-add-to-cart--in-cart" : "")" @(!Model.CanAddToCart ? "disabled" : null)>
+                    <i class="bi @(inCart ? "bi-cart-check-fill" : "bi-cart3")"></i> @(inCart ? "В кошику" : "Додати в кошик")
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="product-tabs-section">
+        <ul class="nav nav-tabs product-tabs-nav" id="productTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab-specs" data-bs-toggle="tab" data-bs-target="#panel-specs" type="button" role="tab">Характеристики</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-warranty" data-bs-toggle="tab" data-bs-target="#panel-warranty" type="button" role="tab">Гарантія</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-usage" data-bs-toggle="tab" data-bs-target="#panel-usage" type="button" role="tab">Як використовувати</button>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active product-tab-panel" id="panel-specs" role="tabpanel">
+                <div class="product-spec-row">
+                    <span class="product-spec-label">Категорія:</span>
+                    <span>@Model.CategoryName</span>
+                </div>
+                <div class="product-spec-row">
+                    <span class="product-spec-label">Постачальник:</span>
+                    <span>@Model.SupplierName</span>
+                </div>
+                <div class="product-spec-row">
+                    <span class="product-spec-label">SKU:</span>
+                    <span>@Model.Sku</span>
+                </div>
+                @if (Model.Weight.HasValue)
+                {
+                    <div class="product-spec-row">
+                        <span class="product-spec-label">Вага:</span>
+                        <span>@Model.Weight.Value.ToString("0.##") кг</span>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Dimensions))
+                {
+                    <div class="product-spec-row">
+                        <span class="product-spec-label">Розміри:</span>
+                        <span>@Model.Dimensions</span>
+                    </div>
+                }
+            </div>
+            <div class="tab-pane fade product-tab-panel" id="panel-warranty" role="tabpanel">
+                <p class="mb-0">Гарантія надається згідно законодавства України.</p>
+            </div>
+            <div class="tab-pane fade product-tab-panel" id="panel-usage" role="tabpanel">
+                <p class="mb-0">Використовуйте продукт згідно інструкції на упаковці.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="product-reviews-section">
+        <h2 class="product-reviews-title">Відгуки</h2>
+
+        @{
+            ViewBag.ProductId = Model.ProductId;
+            ViewBag.PromoId = Model.FromPromotionId;
+            ViewBag.IsReviewAuthenticated = User.Identity?.IsAuthenticated == true;
+        }
+        @if (Model.Reviews.Any())
+        {
+            @foreach (var r in Model.Reviews)
+            {
+                <partial name="_ReviewThread" model="r" />
+            }
+        }
+        else
+        {
+            <p class="review-empty">Поки що немає відгуків. Будьте першим, хто залишить відгук!</p>
+        }
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-action="AddReview" method="post" class="review-form-panel" id="reviewForm">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.ProductId" />
+                @if (Model.FromPromotionId.HasValue)
+                {
+                    <input type="hidden" name="promoId" value="@Model.FromPromotionId" />
+                }
+                <input type="hidden" asp-for="NewReview.Rating" id="reviewRating" value="5" />
+
+                <h3 class="review-form-title">Залишити відгук</h3>
+
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small">Оцінка</label>
+                    <div class="review-rating-input" id="starRating" role="group" aria-label="Оцінка">
+                        @for (byte i = 1; i <= 5; i++)
+                        {
+                            <button type="button" class="star-btn @(i <= 5 ? "active" : "")" data-value="@i" aria-label="@i зірок">☆</button>
+                        }
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <textarea asp-for="NewReview.Comment" id="reviewComment" class="form-control review-form-textarea" rows="4" placeholder="Ваш відгук"></textarea>
+                </div>
+
+                <button type="submit" class="review-submit-btn" id="reviewSubmitBtn" disabled>Залишити відгук</button>
+            </form>
+        }
+    </section>
+
+    @if (Model.Recommendations.Any())
+    {
+        <section class="product-recommendations mt-5">
+            <h3>Рекомендації</h3>
+            <div class="row g-3">
+                @foreach (var p in Model.Recommendations)
+                {
+                    <div class="col-6 col-md-3"><partial name="_ProductCard" model="p" /></div>
+                }
+            </div>
+        </section>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            var ratingInput = document.getElementById('reviewRating');
+            var commentInput = document.getElementById('reviewComment');
+            var submitBtn = document.getElementById('reviewSubmitBtn');
+            var stars = document.querySelectorAll('#starRating .star-btn');
+            if (!ratingInput || !commentInput || !submitBtn) return;
+
+            function paintStars(value) {
+                stars.forEach(function (btn) {
+                    var v = parseInt(btn.dataset.value, 10);
+                    btn.textContent = v <= value ? '★' : '☆';
+                    btn.classList.toggle('active', v <= value);
+                });
+            }
+
+            stars.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var v = parseInt(btn.dataset.value, 10);
+                    ratingInput.value = v;
+                    paintStars(v);
+                });
+            });
+
+            paintStars(parseInt(ratingInput.value, 10) || 5);
+
+            function validateForm() {
+                submitBtn.disabled = !commentInput.value.trim();
+            }
+            commentInput.addEventListener('input', validateForm);
+            validateForm();
+
+            document.querySelectorAll('.review-reply-toggle').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var id = btn.getAttribute('data-reply-for');
+                    var form = document.getElementById('replyForm-' + id);
+                    if (!form) return;
+                    document.querySelectorAll('.review-reply-form').forEach(function (f) {
+                        if (f !== form) f.classList.add('d-none');
+                    });
+                    form.classList.toggle('d-none');
+                    if (!form.classList.contains('d-none')) {
+                        var ta = form.querySelector('textarea');
+                        if (ta) ta.focus();
+                    }
+                });
+            });
+
+            document.querySelectorAll('[data-cancel-reply]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var id = btn.getAttribute('data-cancel-reply');
+                    var form = document.getElementById('replyForm-' + id);
+                    if (form) {
+                        form.classList.add('d-none');
+                        var ta = form.querySelector('textarea');
+                        if (ta) ta.value = '';
+                    }
+                });
+            });
+        })();
+    </script>
+}

@@ -1,0 +1,67 @@
+@model OrderHistoryViewModel
+@{
+    ViewData["Title"] = "Мої замовлення";
+    string StatusLabel(string s) => s switch
+    {
+        "Pending" => "Очікує",
+        "Processing" => "В обробці",
+        "Shipped" => "Відправлено",
+        "Delivered" => "Доставлено",
+        "Cancelled" => "Скасовано",
+        _ => s
+    };
+    string PaymentLabel(string s) => s switch
+    {
+        "Paid" => "Оплачено",
+        "Pending" => "Очікує оплати",
+        _ => s
+    };
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+}
+
+<div class="page-section">
+    <nav aria-label="breadcrumb" class="page-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item active">Мої замовлення</li>
+        </ol>
+    </nav>
+
+    <h1 class="page-title">Історія замовлень</h1>
+
+    @if (!Model.Orders.Any())
+    {
+        <div class="page-glass page-empty">
+            <i class="bi bi-bag"></i>
+            <p class="mb-2">У вас ще немає замовлень</p>
+            <a class="promo-cta d-inline-flex w-auto px-4" asp-controller="Products" asp-action="Index">Перейти до каталогу</a>
+        </div>
+    }
+    else
+    {
+        <div class="page-glass p-0 overflow-hidden">
+            @foreach (var o in Model.Orders)
+            {
+                var paid = o.PaymentStatus.Equals("Paid", StringComparison.OrdinalIgnoreCase);
+                <div class="order-history-card">
+                    <div class="order-history-id">
+                        <span>№</span>@o.OrderId
+                    </div>
+                    <div class="order-history-meta">
+                        <div class="order-history-date">@o.OrderDate.ToString("dd.MM.yyyy HH:mm")</div>
+                        <div class="order-history-badges">
+                            <span class="status-badge status-badge--order">@StatusLabel(o.Status)</span>
+                            <span class="status-badge @(paid ? "status-badge--paid" : "status-badge--pending")">@PaymentLabel(o.PaymentStatus)</span>
+                        </div>
+                    </div>
+                    <div class="order-history-amount">@o.TotalAmount.ToString("N2") грн</div>
+                    <a class="order-history-link" asp-action="Details" asp-route-id="@o.OrderId">
+                        Деталі <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

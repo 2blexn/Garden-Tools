@@ -1,0 +1,179 @@
+@model CartViewModel
+@{
+    ViewData["Title"] = "Кошик";
+    var returnCatalog = Url.Action("Index", "Products")!;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/cart.css" asp-append-version="true" />
+}
+
+<div class="cart-page">
+    <nav aria-label="breadcrumb" class="cart-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Кошик</li>
+        </ol>
+    </nav>
+
+    <h1 class="cart-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM5 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+        </svg>
+        Кошик
+    </h1>
+
+    @if (!Model.Items.Any())
+    {
+        <div class="cart-glass-panel cart-empty-panel">
+            <h2>Ваш кошик порожній</h2>
+            <p>Перейдіть до каталогу, щоб додати товари до кошика</p>
+            <a class="btn btn-cart-checkout d-inline-block w-auto px-4" asp-controller="Products" asp-action="Index">
+                <i class="bi bi-arrow-left me-1"></i> Повернутися до каталогу
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="cart-glass-panel">
+                    <div class="table-responsive">
+                        <table class="table cart-table align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th class="text-center">Ціна</th>
+                                    <th class="text-center">Кількість</th>
+                                    <th class="text-end">Сума</th>
+                                    <th class="text-end"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    var imgSrc = !string.IsNullOrEmpty(item.ImageBase64)
+                                        ? $"data:image/jpeg;base64,{item.ImageBase64}"
+                                        : "/images/placeholder.svg";
+                                    <tr>
+                                        <td data-label="Товар">
+                                            <div class="cart-product-cell">
+                                                <img class="cart-product-img" src="@imgSrc" alt="@item.ProductName"
+                                                     onerror="this.src='/images/placeholder.svg'" />
+                                                <div>
+                                                    <a class="cart-product-name" asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                                                        @item.ProductName
+                                                    </a>
+                                                    @if (!string.IsNullOrWhiteSpace(item.Description))
+                                                    {
+                                                        <div class="cart-product-desc">@item.Description</div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center" data-label="Ціна">
+                                            <span class="cart-price">@item.EffectiveUnitPrice.ToString("N2") грн</span>
+                                        </td>
+                                        <td class="text-center" data-label="Кількість">
+                                            <form asp-action="Update" method="post" class="cart-qty-form" data-product-id="@item.ProductId" data-max="@item.Stock">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                                <div class="cart-qty-wrap">
+                                                    <button type="button" class="cart-qty-btn cart-qty-minus" aria-label="Зменшити">−</button>
+                                                    <input type="number" name="quantity" value="@item.Quantity" min="1" max="@Math.Max(item.Stock, 1)" class="cart-qty-input" />
+                                                    <button type="button" class="cart-qty-btn cart-qty-plus" aria-label="Збільшити">+</button>
+                                                </div>
+                                                @if (item.Stock > 0)
+                                                {
+                                                    <span class="cart-stock-hint">В наявності: @item.Stock</span>
+                                                }
+                                            </form>
+                                        </td>
+                                        <td class="text-end" data-label="Сума">
+                                            <span class="cart-line-total">@item.LineTotal.ToString("N2") грн</span>
+                                        </td>
+                                        <td class="text-end" data-label="">
+                                            <form asp-action="Remove" method="post" class="d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                                <button type="submit" class="cart-remove-btn" title="Видалити" aria-label="Видалити">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="cart-actions-row">
+                    <a class="cart-link-continue" asp-controller="Products" asp-action="Index">
+                        <i class="bi bi-arrow-left"></i> Продовжити покупки
+                    </a>
+                    <form asp-action="Clear" method="post" class="d-inline" onsubmit="return confirm('Ви впевнені, що хочете очистити кошик?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="cart-link-clear">
+                            <i class="bi bi-trash"></i> Очистити кошик
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="cart-glass-panel cart-summary">
+                    <h2 class="cart-summary-title">Разом</h2>
+                    <div class="cart-summary-row">
+                        <span class="label">Кількість товарів:</span>
+                        <span class="value">@Model.TotalItems</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span class="label">Вартість товарів:</span>
+                        <span class="value">@Model.Subtotal.ToString("N2") грн</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span class="label">Вартість доставки:</span>
+                        <span class="value">0.00 грн</span>
+                    </div>
+                    <hr class="cart-summary-divider" />
+                    <div class="cart-summary-row cart-summary-total">
+                        <span class="label">До сплати:</span>
+                        <span class="value">@Model.Subtotal.ToString("N2") грн</span>
+                    </div>
+                    <a class="btn btn-cart-checkout" asp-controller="Orders" asp-action="Checkout">Оформити замовлення</a>
+                    @if (User.Identity?.IsAuthenticated != true)
+                    {
+                        <div class="alert alert-info mt-3 mb-0 small" style="background:rgba(127,255,212,0.1);border-color:rgba(127,255,212,0.3);color:#7fffd4;">
+                            Для оформлення замовлення необхідно
+                            <a asp-controller="Account" asp-action="Login" class="alert-link" style="color:#7fffd4;">увійти</a>
+                            або
+                            <a asp-controller="Account" asp-action="Register" class="alert-link" style="color:#7fffd4;">зареєструватися</a>.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.cart-qty-form').forEach(function (form) {
+            var input = form.querySelector('.cart-qty-input');
+            var max = parseInt(form.dataset.max, 10) || 9999;
+            var min = 1;
+            form.querySelector('.cart-qty-minus')?.addEventListener('click', function () {
+                var v = parseInt(input.value, 10) || 1;
+                if (v > min) { input.value = v - 1; form.submit(); }
+            });
+            form.querySelector('.cart-qty-plus')?.addEventListener('click', function () {
+                var v = parseInt(input.value, 10) || 1;
+                if (v < max) { input.value = v + 1; form.submit(); }
+            });
+            input.addEventListener('change', function () {
+                var v = parseInt(input.value, 10);
+                if (!isNaN(v) && v >= min && v <= max) form.submit();
+            });
+        });
+    </script>
+}

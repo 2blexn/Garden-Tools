@@ -1,0 +1,126 @@
+@model OrderDetailsViewModel
+@{
+    ViewData["Title"] = "Замовлення оформлено";
+    var paid = Model.PaymentStatus.Equals("Paid", StringComparison.OrdinalIgnoreCase);
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />
+}
+
+<div class="order-flow-page">
+    <div class="order-glass-panel success-panel" id="successPanel">
+        <div id="confettiHost" aria-hidden="true"></div>
+
+        <div class="success-icon-wrap">
+            <div class="success-icon-circle">
+                <i class="bi bi-check-lg"></i>
+            </div>
+        </div>
+
+        <h1 class="success-title">Замовлення успішно оформлено!</h1>
+        <p class="success-subtitle">
+            Дякуємо за покупку. Номер вашого замовлення: <strong>#@Model.OrderId</strong>
+            @if (paid)
+            {
+                <span class="d-block mt-1 small text-white-50">Оплату підтверджено</span>
+            }
+        </p>
+
+        <div class="success-details-grid">
+            <div class="success-detail-block">
+                <h3>Інформація про замовлення</h3>
+                <div class="success-detail-row">
+                    <span>Номер:</span>
+                    <strong>#@Model.OrderId</strong>
+                </div>
+                <div class="success-detail-row">
+                    <span>Дата:</span>
+                    <span>@Model.OrderDate.ToString("dd.MM.yyyy")</span>
+                </div>
+                <div class="success-detail-row">
+                    <span>Статус:</span>
+                    <span>@Model.Status</span>
+                </div>
+                <div class="success-detail-row">
+                    <span>Оплата:</span>
+                    <span>@Model.PaymentMethod</span>
+                </div>
+                <div class="success-detail-row">
+                    <span>Статус оплати:</span>
+                    <span>@Model.PaymentStatus</span>
+                </div>
+                <div class="success-detail-row">
+                    <span>Сума:</span>
+                    <strong class="text-info">@Model.TotalAmount.ToString("N2") грн</strong>
+                </div>
+            </div>
+            <div class="success-detail-block">
+                <h3>Доставка</h3>
+                <p class="mb-1 text-white">@Model.CustomerName</p>
+                <p class="mb-1 text-white-50 small">@Model.ShippingAddress</p>
+                <p class="mb-0 text-white-50 small">
+                    @Model.ShippingCity@(string.IsNullOrWhiteSpace(Model.ShippingPostalCode) ? "" : $", {Model.ShippingPostalCode}"), @Model.ShippingCountry
+                </p>
+            </div>
+        </div>
+
+        @if (Model.Lines.Any())
+        {
+            <div class="text-start mb-4" style="animation: slideUp 0.5s ease 0.75s forwards; opacity:0;">
+                <h3 class="order-section-title">Товари</h3>
+                <ul class="order-items-list">
+                    @foreach (var line in Model.Lines)
+                    {
+                        <li class="order-item-row">
+                            <div class="order-item-info">
+                                <div class="order-item-name">@line.ProductName</div>
+                                <div class="order-item-meta">@line.Quantity × @line.UnitPrice.ToString("N2") грн</div>
+                            </div>
+                            <div class="order-item-total">@line.LineTotal.ToString("N2") грн</div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+
+        <div class="success-actions">
+            @if (paid)
+            {
+                <a asp-controller="Orders" asp-action="Receipt" asp-route-id="@Model.OrderId" class="success-btn-primary" target="_blank">
+                    <i class="bi bi-printer"></i> Друк / перегляд чека
+                </a>
+                <a asp-controller="Orders" asp-action="Receipt" asp-route-id="@Model.OrderId" asp-route-download="true" class="success-btn-outline">
+                    <i class="bi bi-download"></i> Завантажити чек
+                </a>
+            }
+            <a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId" class="success-btn-outline">
+                <i class="bi bi-receipt"></i> Деталі замовлення
+            </a>
+            <a asp-controller="Products" asp-action="Index" class="success-btn-outline">
+                <i class="bi bi-bag"></i> Продовжити покупки
+            </a>
+            <a asp-controller="Home" asp-action="Index" class="success-btn-outline">
+                <i class="bi bi-house"></i> На головну
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            var host = document.getElementById('confettiHost');
+            if (!host) return;
+            var colors = ['#7fffd4', '#64d8cb', '#ffd966', '#ffffff'];
+            for (var i = 0; i < 24; i++) {
+                var p = document.createElement('span');
+                p.className = 'confetti-piece';
+                p.style.left = (10 + Math.random() * 80) + '%';
+                p.style.top = (5 + Math.random() * 30) + '%';
+                p.style.background = colors[i % colors.length];
+                p.style.animationDelay = (Math.random() * 0.6) + 's';
+                host.appendChild(p);
+            }
+        })();
+    </script>
+}

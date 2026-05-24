@@ -1,0 +1,230 @@
+.admin-shell {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(160deg, #0f1a12 0%, #172119 45%, #0f1a12 100%);
+}
+
+.admin-sidebar {
+  min-height: calc(100vh - 56px);
+  background: rgba(0, 0, 0, 0.35);
+  border-right: 1px solid rgba(127, 255, 212, 0.15);
+  padding: 1.25rem 0.75rem;
+}
+
+.admin-sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  margin-bottom: 0.25rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-sidebar .nav-link:hover {
+  background: rgba(127, 255, 212, 0.1);
+  color: #7fffd4;
+}
+
+.admin-sidebar .nav-link.active {
+  background: rgba(127, 255, 212, 0.2);
+  color: #7fffd4;
+  font-weight: 600;
+}
+
+.admin-main {
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+.admin-page-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.admin-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-stat-card {
+  background: rgba(23, 33, 25, 0.85);
+  border: 1px solid rgba(127, 255, 212, 0.2);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+}
+
+.admin-stat-card .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-stat-card .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #7fffd4;
+}
+
+.admin-panel {
+  background: rgba(23, 33, 25, 0.75);
+  border: 1px solid rgba(127, 255, 212, 0.18);
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(10px);
+}
+
+.admin-table {
+  width: 100%;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.admin-table th {
+  color: #7fffd4;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-color: rgba(127, 255, 212, 0.15);
+}
+
+.admin-table td {
+  border-color: rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
+}
+
+.admin-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.admin-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(127, 255, 212, 0.35);
+}
+
+.admin-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1976d2;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.admin-review-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1rem;
+  background: rgba(15, 26, 18, 0.6);
+}
+
+.admin-review-card.is-pending {
+  border-left: 4px solid #ffc107;
+}
+
+.admin-review-card.is-high-risk {
+  border-left: 4px solid #ff6b6b;
+}
+
+.admin-mod-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  margin-right: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.admin-mod-badge--risk {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff8a8a;
+  border: 1px solid rgba(255, 107, 107, 0.35);
+}
+
+.admin-mod-badge--ok {
+  background: rgba(127, 255, 212, 0.15);
+  color: #7fffd4;
+  border: 1px solid rgba(127, 255, 212, 0.3);
+}
+
+.admin-mod-score {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.admin-form .form-control,
+.admin-form .form-select {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: rgba(127, 255, 212, 0.25);
+  color: #fff;
+}
+
+.admin-form label {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+}
+
+.admin-chart-wrap {
+  position: relative;
+  height: 280px;
+}
+
+.admin-select {
+  max-height: 220px;
+}
+
+.admin-select-product option {
+  padding: 0.35rem 0;
+  line-height: 1.4;
+}
+
+.admin-readonly-label {
+  background: rgba(0, 0, 0, 0.35) !important;
+  border-color: rgba(127, 255, 212, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.admin-promo-line {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.search-page .search-hero-input {
+  width: 100%;
+  max-width: 720px;
+  padding: 0.85rem 1rem 0.85rem 2.75rem;
+  background: rgba(23, 33, 25, 0.8);
+  border: 1px solid rgba(127, 255, 212, 0.3);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.05rem;
+}

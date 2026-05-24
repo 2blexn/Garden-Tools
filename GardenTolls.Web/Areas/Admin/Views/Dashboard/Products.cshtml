@@ -1,0 +1,103 @@
+@model AdminProductsPageViewModel
+@{ ViewData["Title"] = "Товари"; }
+<h1 class="admin-page-title">Товари <a class="btn btn-sm btn-gt" asp-action="EditProduct"><i class="bi bi-plus-lg"></i> Додати</a></h1>
+
+<form method="get" class="admin-panel admin-form mb-3">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-4">
+            <label class="small text-white-50">Пошук</label>
+            <input type="search" name="Search" value="@Model.Filter.Search" class="form-control" placeholder="Назва, SKU, опис..." />
+        </div>
+        <div class="col-md-3">
+            <label class="small text-white-50">Категорія</label>
+            <select name="CategoryId" class="form-select admin-select">
+                <option value="">— усі —</option>
+                @foreach (var c in Model.Categories)
+                {
+                    <option value="@c.Id" selected="@(Model.Filter.CategoryId == c.Id)">@c.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="small text-white-50">Постачальник</label>
+            <select name="SupplierId" class="form-select admin-select">
+                <option value="">— усі —</option>
+                @foreach (var s in Model.Suppliers)
+                {
+                    <option value="@s.Id" selected="@(Model.Filter.SupplierId == s.Id)">@s.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="small text-white-50">Сортування</label>
+            <select name="SortBy" class="form-select admin-select">
+                <option value="name" selected="@(Model.Filter.SortBy == "name")">За назвою</option>
+                <option value="price" selected="@(Model.Filter.SortBy == "price")">За ціною</option>
+                <option value="stock" selected="@(Model.Filter.SortBy == "stock")">За складом</option>
+                <option value="sku" selected="@(Model.Filter.SortBy == "sku")">За SKU</option>
+                <option value="id" selected="@(Model.Filter.SortBy == "id")">За ID</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="small text-white-50">Напрям</label>
+            <select name="SortDesc" class="form-select admin-select">
+                <option value="false" selected="@(!Model.Filter.SortDesc)">За зростанням</option>
+                <option value="true" selected="@(Model.Filter.SortDesc)">За спаданням</option>
+            </select>
+        </div>
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-gt flex-grow-1"><i class="bi bi-funnel"></i> Застосувати</button>
+            <a class="btn btn-outline-light" asp-action="Products" title="Скинути">×</a>
+        </div>
+    </div>
+</form>
+
+<p class="text-white-50 small mb-2">Знайдено: <strong class="text-info">@Model.TotalCount</strong></p>
+
+<div class="admin-panel p-0 overflow-hidden">
+    <table class="table admin-table mb-0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th></th>
+                <th>Назва</th>
+                <th>Категорія</th>
+                <th>Бренд</th>
+                <th>Ціна</th>
+                <th>SKU</th>
+                <th>Склад</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Products.Any())
+        {
+            <tr>
+                <td colspan="9" class="text-center text-white-50 py-4">Товарів не знайдено</td>
+            </tr>
+        }
+        @foreach (var p in Model.Products)
+        {
+            var img = !string.IsNullOrEmpty(p.ImageBase64) ? $"data:image/jpeg;base64,{p.ImageBase64}" : "/images/placeholder.svg";
+            <tr>
+                <td>@p.ProductId</td>
+                <td><img src="@img" alt="" class="admin-thumb" onerror="this.src='/images/placeholder.svg'" /></td>
+                <td>@p.ProductName</td>
+                <td class="small text-white-50">@p.CategoryName</td>
+                <td class="small text-white-50">@p.SupplierName</td>
+                <td>@p.UnitPrice.ToString("N2") ₴</td>
+                <td>@p.Sku</td>
+                <td>@p.QuantityInStock</td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-light" asp-action="EditProduct" asp-route-id="@p.ProductId">Редагувати</a>
+                    <form asp-action="DeleteProduct" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@p.ProductId" />
+                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Видалити?')">×</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

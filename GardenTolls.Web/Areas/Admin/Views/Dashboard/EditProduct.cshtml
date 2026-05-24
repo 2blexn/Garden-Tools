@@ -1,0 +1,73 @@
+@model AdminProductEditViewModel
+@{
+    ViewData["Title"] = Model.ProductId.HasValue ? "Редагування товару" : "Новий товар";
+    var preview = !string.IsNullOrEmpty(Model.ImageBase64) ? $"data:image/jpeg;base64,{Model.ImageBase64}" : null;
+}
+<h1 class="admin-page-title">@ViewData["Title"]</h1>
+
+<form asp-action="EditProduct" method="post" enctype="multipart/form-data" class="admin-panel admin-form col-xl-8">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="ProductId" />
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="row g-3">
+        <div class="col-md-8">
+            <label>Назва</label>
+            <input asp-for="ProductName" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label>Фото товару</label>
+            <input type="file" name="productImage" accept="image/*" class="form-control" id="productImageInput" />
+        </div>
+        <div class="col-12">
+            @if (preview != null)
+            {
+                <img src="@preview" alt="" class="admin-thumb" style="width:120px;height:120px" id="productImagePreview" />
+            }
+            else
+            {
+                <img src="/images/placeholder.svg" alt="" class="admin-thumb" style="width:120px;height:120px" id="productImagePreview" />
+            }
+        </div>
+        <div class="col-md-6">
+            <label>Категорія</label>
+            <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-select"></select>
+        </div>
+        <div class="col-md-6">
+            <label>Постачальник</label>
+            <select asp-for="SupplierId" asp-items="@(new SelectList(Model.Suppliers,"Id","Name"))" class="form-select"></select>
+        </div>
+        <div class="col-12">
+            <label>Опис</label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        </div>
+        <div class="col-md-4"><label>Ціна</label><input asp-for="UnitPrice" class="form-control" /></div>
+        <div class="col-md-4"><label>SKU</label><input asp-for="Sku" class="form-control" /></div>
+        <div class="col-md-4"><label>На складі</label><input asp-for="QuantityInStock" class="form-control" /></div>
+        <div class="col-md-4"><label>Мін. залишок</label><input asp-for="ReorderLevel" class="form-control" /></div>
+        <div class="col-12">
+            <div class="form-check">
+                <input asp-for="IsDiscontinued" class="form-check-input" />
+                <label class="form-check-label">Знятий з продажу</label>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-gt mt-3"><i class="bi bi-check-lg"></i> Зберегти</button>
+</form>
+
+@section Scripts {
+<script>
+(function () {
+    var input = document.getElementById('productImageInput');
+    var preview = document.getElementById('productImagePreview');
+    if (!input || !preview) return;
+    input.addEventListener('change', function () {
+        var f = input.files && input.files[0];
+        if (!f) return;
+        var r = new FileReader();
+        r.onload = function (e) { preview.src = e.target.result; };
+        r.readAsDataURL(f);
+    });
+})();
+</script>
+}

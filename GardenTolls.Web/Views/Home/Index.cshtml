@@ -1,0 +1,117 @@
+﻿@using GardenTolls.Web.ViewModels.Promotions
+@{
+    ViewData["Title"] = "Головна";
+    var featured = ViewBag.Featured as List<ProductCardViewModel> ?? [];
+    var promos = ViewBag.ActivePromotions as List<PromotionCardViewModel> ?? [];
+    var categories = ViewBag.Categories as List<GardenTolls.Web.Models.Category> ?? [];
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/hero-banner.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/catalog.css" asp-append-version="true" />
+}
+
+<section class="hero-banner hero-banner--fullwidth mb-5">
+    <div class="hero-banner-image" style="background-image:url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920');">
+        <div class="hero-banner-content">
+            <h1 class="hero-banner-title">Садові інструменти преміум-класу</h1>
+            <p class="hero-banner-description">Усе для вашого саду та городу — від лопат до систем поливу. Доставка по Україні.</p>
+            <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+                <a class="hero-banner-button" asp-controller="Products" asp-action="Index">Перейти до каталогу</a>
+                <a class="hero-banner-button hero-banner-button--outline" asp-controller="Home" asp-action="Promotions">Акції та знижки</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-features mb-5">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="home-feature-card">
+                <i class="bi bi-truck"></i>
+                <h3>Швидка доставка</h3>
+                <p class="mb-0">Відправка замовлень у найкоротші терміни</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="home-feature-card">
+                <i class="bi bi-shield-check"></i>
+                <h3>Гарантія якості</h3>
+                <p class="mb-0">Перевірені бренди та офіційні постачальники</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="home-feature-card">
+                <i class="bi bi-headset"></i>
+                <h3>Підтримка</h3>
+                <p class="mb-0">Консультації та допомога з вибором</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (promos.Any())
+{
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-end mb-3 flex-wrap gap-2">
+            <h2 class="page-title mb-0" style="font-size:1.5rem;">Актуальні акції</h2>
+            <a asp-action="Promotions" class="text-info text-decoration-none">Усі акції <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="promo-grid">
+            @foreach (var p in promos)
+            {
+                <article class="promo-card">
+                    @if (p.MaxDiscountPercent.HasValue)
+                    {
+                        <span class="promo-badge">До -@p.MaxDiscountPercent.Value.ToString("0")%</span>
+                    }
+                    <h3 class="promo-title">@p.Name</h3>
+                    <p class="promo-dates">@p.StartDate.ToString("dd.MM") — @p.EndDate.ToString("dd.MM.yyyy")</p>
+                    <a class="promo-cta" asp-controller="Promotions" asp-action="Details" asp-route-id="@p.PromotionId">
+                        <i class="bi bi-arrow-right"></i> Деталі
+                    </a>
+                </article>
+            }
+        </div>
+    </section>
+}
+
+@if (categories.Any())
+{
+    <section class="mb-5">
+        <h2 class="page-title mb-3" style="font-size:1.5rem;">Категорії</h2>
+        <div class="home-categories-row">
+            @foreach (var c in categories.Take(8))
+            {
+                <a class="home-category-chip" asp-controller="Products" asp-action="Index" asp-route-CategoryId="@c.CategoryID">
+                    @c.Name
+                </a>
+            }
+        </div>
+    </section>
+}
+
+<section class="mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-3 flex-wrap gap-2">
+        <h2 class="page-title mb-0" style="font-size:1.5rem;">Популярні товари</h2>
+        <a asp-controller="Products" asp-action="Index" class="text-info text-decoration-none">Весь каталог</a>
+    </div>
+    @if (featured.Any())
+    {
+        <div class="catalog-grid">
+            @foreach (var p in featured)
+            {
+                ViewData["CardVariant"] = "catalog";
+                <div class="catalog-grid-col">
+                    <partial name="_ProductCard" model="p" />
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<section class="page-glass home-cta-banner text-center p-4 mb-4">
+    <h2 class="h4 text-info mb-2">Потрібна допомога з вибором?</h2>
+    <p class="text-white-50 mb-3">Зв'яжіться з нами — підберемо інструменти під ваш сад</p>
+    <a asp-controller="Home" asp-action="Contacts" class="btn btn-gt">Контакти</a>
+</section>

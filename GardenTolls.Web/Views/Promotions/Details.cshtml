@@ -1,0 +1,128 @@
+@model PromotionCatalogViewModel
+@{
+    ViewData["Title"] = Model.PromotionName;
+    var sortOption = Model.Filter.SortBy switch
+    {
+        "price" => Model.Filter.SortDesc ? "price-desc" : "price-asc",
+        _ => Model.Filter.SortDesc ? "name-desc" : "name-asc"
+    };
+    var maxPriceUi = Model.Filter.MaxPrice ?? 5000;
+    var minPriceUi = Model.Filter.MinPrice ?? 0;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/catalog.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+}
+
+<div class="catalog-page page-section">
+    <nav aria-label="breadcrumb" class="page-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Promotions">Усі акції</a></li>
+            <li class="breadcrumb-item active">@Model.PromotionName</li>
+        </ol>
+    </nav>
+
+    <div class="promo-catalog-header">
+        <h1 class="page-title mb-2">@Model.PromotionName</h1>
+        <p class="text-white-50 mb-2">
+            @Model.StartDate.ToString("dd.MM.yyyy") — @Model.EndDate.ToString("dd.MM.yyyy")
+            @if (Model.MaxDiscountPercent.HasValue)
+            {
+                <span class="ms-2 promo-badge">До -@Model.MaxDiscountPercent.Value.ToString("0")%</span>
+            }
+        </p>
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <p class="promo-desc mb-3">@Model.Description</p>
+        }
+        @if (Model.IsNightFlash)
+        {
+            <div class="promo-night-timer" id="nightPromoTimer" data-end="@Model.EndDate.ToString("o")">
+                <i class="bi bi-moon-stars"></i>
+                <span>До кінця нічної акції:</span>
+                <strong id="nightTimerValue">--:--:--</strong>
+            </div>
+        }
+    </div>
+
+    <form method="get" id="promoCatalogForm">
+        <input type="hidden" name="id" value="@Model.PromotionId" />
+        <div class="catalog-toolbar catalog-toolbar-row">
+            <div class="catalog-toolbar-search">
+                <div class="catalog-search-wrap">
+                    <i class="bi bi-search"></i>
+                    <input asp-for="Filter.Search" class="catalog-search-input" placeholder="Пошук у товарах акції..." />
+                </div>
+            </div>
+            <div class="catalog-toolbar-sort">
+                <label class="catalog-sort-label"><i class="bi bi-sort-down"></i> Сортування</label>
+                <select name="sortOption" class="catalog-sort-select" onchange="document.getElementById('promoCatalogForm').submit()">
+                    <option value="name-asc" selected="@(sortOption == "name-asc")">Назва (А-Я)</option>
+                    <option value="name-desc" selected="@(sortOption == "name-desc")">Назва (Я-А)</option>
+                    <option value="price-asc" selected="@(sortOption == "price-asc")">Ціна (від низької)</option>
+                    <option value="price-desc" selected="@(sortOption == "price-desc")">Ціна (від високої)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="catalog-layout">
+            <aside class="catalog-sidebar">
+                <div class="catalog-filters-panel">
+                    <div class="catalog-filters-title"><i class="bi bi-list"></i> Фільтри</div>
+                    <label class="catalog-filter-label">Ціна до</label>
+                    <input type="range" class="catalog-price-slider" min="0" max="5000" step="50"
+                           value="@maxPriceUi" onchange="document.getElementById('promoMaxPrice').value=this.value; document.getElementById('promoCatalogForm').submit()" />
+                    <input type="hidden" asp-for="Filter.MinPrice" value="@minPriceUi" />
+                    <input type="hidden" asp-for="Filter.MaxPrice" id="promoMaxPrice" value="@maxPriceUi" />
+                    <div class="catalog-price-labels"><span>0 грн</span><span>@maxPriceUi грн</span></div>
+                    <a asp-action="Details" asp-route-id="@Model.PromotionId" class="catalog-reset-btn d-block text-center text-decoration-none mt-3">Скинути</a>
+                </div>
+            </aside>
+
+            <div class="catalog-main">
+                <p class="catalog-results-count mb-3">Знайдено: @Model.TotalCount</p>
+                @if (!Model.Products.Any())
+                {
+                    <div class="page-glass page-empty"><p class="mb-0">За вашими фільтрами товарів не знайдено.</p></div>
+                }
+                else
+                {
+                    <div class="catalog-grid">
+                        @foreach (var p in Model.Products)
+                        {
+                            ViewData["CardVariant"] = "catalog";
+                            <div class="catalog-grid-col">
+                                <partial name="_ProductCard" model="p" />
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @if (Model.IsNightFlash)
+    {
+        <script>
+            (function () {
+                var host = document.getElementById('nightPromoTimer');
+                var out = document.getElementById('nightTimerValue');
+                if (!host || !out) return;
+                var end = new Date(host.dataset.end).getTime();
+                function tick() {
+                    var diff = end - Date.now();
+                    if (diff <= 0) { out.textContent = '00:00:00'; return; }
+                    var h = Math.floor(diff / 3600000);
+                    var m = Math.floor((diff % 3600000) / 60000);
+                    var s = Math.floor((diff % 60000) / 1000);
+                    out.textContent = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+                }
+                tick();
+                setInterval(tick, 1000);
+            })();
+        </script>
+    }
+}

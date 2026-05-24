@@ -1,0 +1,38 @@
+@model List<OrderSummaryViewModel>
+@{ ViewData["Title"] = "Замовлення"; }
+<h1 class="admin-page-title">Замовлення</h1>
+
+<div class="admin-panel p-0 overflow-hidden">
+    <table class="table admin-table mb-0">
+        <thead>
+            <tr><th>#</th><th>Дата</th><th>Статус</th><th>Оплата</th><th>Сума</th><th>Позицій</th><th></th></tr>
+        </thead>
+        <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>@o.OrderId</td>
+                <td>@o.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@o.Status</td>
+                <td>@o.PaymentStatus</td>
+                <td>@o.TotalAmount.ToString("N2") ₴</td>
+                <td>@o.ItemCount</td>
+                <td>
+                    <form asp-action="UpdateOrderStatus" method="post" class="d-flex gap-1">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="orderId" value="@o.OrderId" />
+                        <select name="status" class="form-select form-select-sm" style="width:auto">
+                            <option value="Pending" selected="@(o.Status == "Pending")">Pending</option>
+                            <option value="Processing" selected="@(o.Status == "Processing")">Processing</option>
+                            <option value="Shipped" selected="@(o.Status == "Shipped")">Shipped</option>
+                            <option value="Delivered" selected="@(o.Status == "Delivered")">Delivered</option>
+                            <option value="Cancelled" selected="@(o.Status == "Cancelled")">Cancelled</option>
+                        </select>
+                        <button class="btn btn-sm btn-gt">OK</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

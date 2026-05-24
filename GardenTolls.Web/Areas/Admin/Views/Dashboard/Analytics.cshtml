@@ -1,0 +1,137 @@
+@model AnalyticsViewModel
+@{
+    ViewData["Title"] = "Аналітика";
+    var salesLabels = System.Text.Json.JsonSerializer.Serialize(Model.SalesByMonth.Select(s => s.Label));
+    var salesData = System.Text.Json.JsonSerializer.Serialize(Model.SalesByMonth.Select(s => s.Total));
+    var popularLabels = System.Text.Json.JsonSerializer.Serialize(Model.PopularProducts.Take(8).Select(p => p.ProductName));
+    var popularQty = System.Text.Json.JsonSerializer.Serialize(Model.PopularProducts.Take(8).Select(p => p.QuantitySold));
+}
+<h1 class="admin-page-title">Аналітика продажів</h1>
+
+<div class="admin-panel mb-4">
+    <h2 class="h6 text-info mb-3"><i class="bi bi-file-earmark-arrow-down"></i> Звіти та експорт</h2>
+    <div class="row g-2">
+        <div class="col-md-4">
+            <div class="small text-white-50 mb-1">Продажі по місяцях</div>
+            <div class="d-flex flex-wrap gap-1">
+                <a class="btn btn-sm btn-outline-info" asp-action="ExportReport" asp-route-report="sales" asp-route-format="html">HTML</a>
+                <a class="btn btn-sm btn-outline-light" asp-action="PreviewReport" asp-route-report="sales" target="_blank">Перегляд / PDF</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="small text-white-50 mb-1">Популярні товари</div>
+            <div class="d-flex flex-wrap gap-1">
+                <a class="btn btn-sm btn-outline-info" asp-action="ExportReport" asp-route-report="popular" asp-route-format="html">HTML</a>
+                <a class="btn btn-sm btn-outline-light" asp-action="PreviewReport" asp-route-report="popular" target="_blank">Перегляд / PDF</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="small text-white-50 mb-1">Статистика клієнтів</div>
+            <div class="d-flex flex-wrap gap-1">
+                <a class="btn btn-sm btn-outline-info" asp-action="ExportReport" asp-route-report="customers" asp-route-format="html">HTML</a>
+                <a class="btn btn-sm btn-outline-light" asp-action="PreviewReport" asp-route-report="customers" target="_blank">Перегляд / PDF</a>
+            </div>
+        </div>
+    </div>
+    <p class="small text-white-50 mb-0 mt-2">Для PDF: відкрийте «Перегляд» і оберіть «Зберегти як PDF» у діалозі друку.</p>
+</div>
+
+<div class="admin-stat-grid mb-4">
+    <div class="admin-stat-card"><div class="label">Клієнтів</div><div class="value">@Model.CustomerStats.TotalCustomers</div></div>
+    <div class="admin-stat-card"><div class="label">Нових за 30 днів</div><div class="value">@Model.CustomerStats.NewCustomersLast30Days</div></div>
+    <div class="admin-stat-card"><div class="label">Середній чек</div><div class="value">@Model.CustomerStats.AverageOrderValue.ToString("N0") ₴</div></div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="admin-panel">
+            <h2 class="h6 text-info mb-3">Продажі по місяцях</h2>
+            <div class="admin-chart-wrap"><canvas id="salesChart"></canvas></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="admin-panel">
+            <h2 class="h6 text-info mb-3">Популярні товари (кількість)</h2>
+            <div class="admin-chart-wrap"><canvas id="popularChart"></canvas></div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="admin-panel p-0 overflow-hidden">
+            <table class="table admin-table mb-0">
+                <thead><tr><th>Товар</th><th>Продано</th><th>Дохід</th></tr></thead>
+                <tbody>
+                @foreach (var p in Model.PopularProducts)
+                {
+                    <tr><td>@p.ProductName</td><td>@p.QuantitySold</td><td>@p.Revenue.ToString("N2") ₴</td></tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+(function () {
+    var mint = '#7fffd4';
+    var grid = 'rgba(255,255,255,0.08)';
+    var labels = @Html.Raw(salesLabels);
+    var sales = @Html.Raw(salesData);
+    var pLabels = @Html.Raw(popularLabels);
+    var pQty = @Html.Raw(popularQty);
+
+    if (document.getElementById('salesChart')) {
+        new Chart(document.getElementById('salesChart'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Дохід, ₴',
+                    data: sales,
+                    borderColor: mint,
+                    backgroundColor: 'rgba(127,255,212,0.15)',
+                    fill: true,
+                    tension: 0.35
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#fff' } } },
+                scales: {
+                    x: { ticks: { color: '#aaa' }, grid: { color: grid } },
+                    y: { ticks: { color: '#aaa' }, grid: { color: grid } }
+                }
+            }
+        });
+    }
+
+    if (document.getElementById('popularChart')) {
+        new Chart(document.getElementById('popularChart'), {
+            type: 'bar',
+            data: {
+                labels: pLabels,
+                datasets: [{
+                    label: 'Продано, шт',
+                    data: pQty,
+                    backgroundColor: 'rgba(127,255,212,0.55)',
+                    borderColor: mint,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: { legend: { labels: { color: '#fff' } } },
+                scales: {
+                    x: { ticks: { color: '#aaa' }, grid: { color: grid } },
+                    y: { ticks: { color: '#aaa' }, grid: { color: grid } }
+                }
+            }
+        });
+    }
+})();
+</script>
+}

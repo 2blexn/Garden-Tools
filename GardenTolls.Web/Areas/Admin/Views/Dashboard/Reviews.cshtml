@@ -1,0 +1,85 @@
+@model List<AdminReviewViewModel>
+@{ ViewData["Title"] = "Модерація відгуків"; }
+<h1 class="admin-page-title">Модерація відгуків</h1>
+<p class="text-white-50 mb-4">AI-аналіз тексту: нецензурна лексика, пропаганда війни, мова ворожнечі, спам.</p>
+
+@foreach (var r in Model)
+{
+    var cardClass = !r.IsApproved ? "is-pending" : r.IsHighRisk ? "is-high-risk" : "";
+    <article class="admin-review-card @cardClass">
+        <div class="d-flex gap-3">
+            @if (!string.IsNullOrEmpty(r.AuthorAvatar))
+            {
+                <img src="data:image/jpeg;base64,@r.AuthorAvatar" class="admin-avatar" alt="" />
+            }
+            else
+            {
+                <span class="admin-avatar-placeholder">@r.AuthorInitial</span>
+            }
+            <div class="flex-grow-1">
+                <div class="d-flex flex-wrap justify-content-between gap-2">
+                    <div>
+                        <strong>@r.Author</strong>
+                        @if (r.IsReply) { <span class="badge bg-secondary ms-1">Відповідь</span> }
+                        <div class="small text-white-50">@r.ProductName · @FormatReviewDateTime(r.ReviewDate)</div>
+                    </div>
+                    <div class="admin-mod-score">
+                        Ризик: <strong class="@(r.IsHighRisk ? "text-danger" : "text-info")">@r.RiskScore%</strong>
+                        · @(r.IsApproved ? "Опубліковано" : "На модерації")
+                    </div>
+                </div>
+
+                @if (r.Rating.HasValue) { <div class="text-warning my-1">★ @r.Rating / 5</div> }
+                <p class="mb-2 mt-2">@r.Comment</p>
+
+                <div class="mb-2">
+                    @if (r.ModerationFlags.Any())
+                    {
+                        @foreach (var flag in r.ModerationFlags)
+                        {
+                            <span class="admin-mod-badge admin-mod-badge--risk"><i class="bi bi-exclamation-triangle"></i> @flag</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="admin-mod-badge admin-mod-badge--ok"><i class="bi bi-check-circle"></i> Чистий текст</span>
+                    }
+                </div>
+
+                <div class="admin-actions">
+                    @if (!r.IsApproved)
+                    {
+                        <form asp-action="ApproveReview" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="reviewId" value="@r.ReviewId" />
+                            <input type="hidden" name="approved" value="true" />
+                            <button class="btn btn-sm btn-gt"><i class="bi bi-check2"></i> Схвалити</button>
+                        </form>
+                    }
+                    <form asp-action="HideReview" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="reviewId" value="@r.ReviewId" />
+                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-eye-slash"></i> Приховати</button>
+                    </form>
+                    <form asp-action="DeleteReview" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="reviewId" value="@r.ReviewId" />
+                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Видалити відгук?')"><i class="bi bi-trash"></i> Видалити</button>
+                    </form>
+                    <form asp-action="DeleteReviewAndRestrict" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="reviewId" value="@r.ReviewId" />
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Видалити і заборонити користувачу відгуки?')">
+                            <i class="bi bi-slash-circle"></i> Видалити + обмежити
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+}
+
+@if (!Model.Any())
+{
+    <div class="admin-panel text-center text-white-50">Немає відгуків для модерації.</div>
+}

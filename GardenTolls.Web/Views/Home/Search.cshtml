@@ -1,0 +1,69 @@
+@model SiteSearchViewModel
+@{
+    ViewData["Title"] = string.IsNullOrWhiteSpace(Model.Query) ? "Пошук" : $"Пошук: {Model.Query}";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/catalog.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+}
+
+<div class="page-section search-page">
+    <h1 class="page-title">Розширений пошук</h1>
+
+    <div class="gt-search-wrap gt-search-wrap--page mb-4" style="max-width:720px">
+        <form method="get" class="position-relative" id="searchPageForm">
+            <i class="bi bi-search position-absolute text-info" style="left:14px;top:50%;transform:translateY(-50%);z-index:2"></i>
+            <input type="search" name="q" id="searchPageInput" value="@Model.Query" class="search-hero-input" placeholder="Товари, акції, опис..." autofocus style="padding-left:2.75rem" />
+        </form>
+        <div class="gt-search-dropdown gt-search-dropdown--page" id="searchPageSuggestions" role="menu" hidden>
+            <partial name="_SearchSuggestionsContent" model="Model.Suggestions" />
+        </div>
+    </div>
+
+    @if (string.IsNullOrWhiteSpace(Model.Query))
+    {
+        <p class="text-white-50">Введіть запит для пошуку по каталогу товарів та акцій.</p>
+    }
+    else
+    {
+        <p class="text-white-50 mb-4">Знайдено результатів: <strong class="text-info">@Model.TotalResults</strong></p>
+
+        @if (Model.Products.Any())
+        {
+            <h2 class="h5 text-info mb-3"><i class="bi bi-box-seam"></i> Товари</h2>
+            <div class="catalog-grid mb-5">
+                @foreach (var p in Model.Products)
+                {
+                    ViewData["CardVariant"] = "catalog";
+                    <div class="catalog-grid-col">
+                        <partial name="_ProductCard" model="p" />
+                    </div>
+                }
+            </div>
+        }
+
+        @if (Model.Promotions.Any())
+        {
+            <h2 class="h5 text-info mb-3"><i class="bi bi-tag"></i> Акції</h2>
+            <div class="promo-grid">
+                @foreach (var p in Model.Promotions)
+                {
+                    <article class="promo-card">
+                        <h3 class="promo-title">@p.Name</h3>
+                        <p class="promo-dates">@p.StartDate.ToString("dd.MM.yyyy") — @p.EndDate.ToString("dd.MM.yyyy")</p>
+                        <a class="promo-cta" asp-controller="Promotions" asp-action="Details" asp-route-id="@p.PromotionId">
+                            <i class="bi bi-arrow-right"></i> Переглянути
+                        </a>
+                    </article>
+                }
+            </div>
+        }
+
+        @if (!Model.Products.Any() && !Model.Promotions.Any())
+        {
+            <div class="page-glass page-empty">
+                <p class="mb-0">За запитом «@Model.Query» нічого не знайдено.</p>
+            </div>
+        }
+    }
+</div>

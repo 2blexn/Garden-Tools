@@ -1,0 +1,162 @@
+﻿@inject GardenTolls.Web.Services.ICartService CartService
+@{
+    var cart = CartService.GetCart(Context.Session);
+    var wishlistCount = CartService.GetWishlistCount(Context.Session);
+    ViewBag.CartProductIds = CartService.GetCartProductIds(Context.Session);
+    var isAdmin = User.IsAdminOrManager();
+    var userInitial = User.Identity?.Name?.Length > 0
+        ? User.Identity.Name[0].ToString().ToUpperInvariant()
+        : "?";
+}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Garden Tools</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/hero-banner.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg gt-navbar sticky-top">
+            <div class="container-xl">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Garden Tools</a>
+
+                <button class="navbar-toggler gt-burger" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#mainNav" aria-controls="mainNav"
+                        aria-expanded="false" aria-label="Відкрити меню">
+                    <span class="gt-burger-box" aria-hidden="true">
+                        <span class="gt-burger-line"></span>
+                        <span class="gt-burger-line"></span>
+                        <span class="gt-burger-line"></span>
+                    </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Products" asp-action="Index">Каталог</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Promotions">Акції</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Contacts">Контакти</a>
+                        </li>
+                        @if (isAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Адмін</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="gt-search-wrap me-lg-3 mb-3 mb-lg-0">
+                        <form class="gt-search" asp-controller="Home" asp-action="Search" method="get" id="gtSearchForm">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-transparent border-0 text-white-50">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input class="form-control border-0 shadow-none bg-transparent text-white" type="search" name="q" id="gtSearchInput" placeholder="Пошук..." value="@Context.Request.Query["q"]" autocomplete="off" />
+                            </div>
+                        </form>
+                        @await Component.InvokeAsync("SearchSuggestions")
+                    </div>
+
+                    <ul class="navbar-nav align-items-lg-center gap-lg-2">
+                        <li class="nav-item">
+                            <a class="nav-link gt-wishlist-link position-relative" asp-controller="Cart" asp-action="Wishlist" title="Список бажань">
+                                <i class="bi bi-heart"></i>
+                                @if (wishlistCount > 0)
+                                {
+                                    <span class="badge gt-cart-badge">@wishlistCount</span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link gt-cart-link" asp-controller="Cart" asp-action="Index" title="Кошик">
+                                <i class="bi bi-cart3 fs-5"></i>
+                                @if (cart.TotalItems > 0)
+                                {
+                                    <span class="badge gt-cart-badge">@cart.TotalItems</span>
+                                }
+                            </a>
+                        </li>
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="gt-user-avatar">@userInitial</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end gt-user-dropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Профіль</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Orders" asp-action="History">Мої замовлення</a>
+                                    </li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="dropdown-item">Вийти</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-sm btn-outline-light rounded-pill px-3" asp-controller="Account" asp-action="Login">Увійти</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-xl py-4 flex-grow-1">
+        <div class="gt-toast-stack" aria-live="polite">
+            <partial name="_Alerts" />
+        </div>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="gt-footer mt-auto">
+        <div class="container-xl">
+            <div class="row align-items-center gy-3">
+                <div class="col-md-6 text-center text-md-start">
+                    <h5 class="mb-1 fw-bold">Garden Tools</h5>
+                    <p class="mb-0 small text-light-emphasis">Інструменти для саду та городу</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-center justify-content-md-end gap-3">
+                        <a asp-controller="Home" asp-action="Index" class="footer-link">Головна</a>
+                        <a asp-controller="Products" asp-action="Index" class="footer-link">Каталог</a>
+                        <a asp-controller="Home" asp-action="Contacts" class="footer-link">Контакти</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider" />
+            <div class="text-center small text-light-emphasis">
+                &copy; @DateTime.Now.Year Garden Tools. Усі права захищені.
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

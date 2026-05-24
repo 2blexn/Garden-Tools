@@ -1,0 +1,190 @@
+@model AdminPromotionEditViewModel
+@{ ViewData["Title"] = Model.PromotionId.HasValue ? "Редагування акції" : "Нова акція"; }
+<h1 class="admin-page-title">@ViewData["Title"]</h1>
+
+<form asp-action="EditPromotion" method="post" class="admin-panel admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="PromotionId" />
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="row g-3">
+        <div class="col-md-8">
+            <label>Назва акції</label>
+            <input asp-for="PromotionName" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label>Постачальник</label>
+            <select asp-for="SupplierId" asp-items="@(new SelectList(Model.Suppliers,"Id","Name"))" class="form-select admin-select"></select>
+        </div>
+        <div class="col-12">
+            <label>Опис</label>
+            <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="col-md-4">
+            <label>Початок</label>
+            <input asp-for="StartDate" type="datetime-local" class="form-control"
+                   value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <div class="col-md-4">
+            <label>Завершення</label>
+            <input asp-for="EndDate" type="datetime-local" class="form-control"
+                   value="@Model.EndDate.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <div class="form-check">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label class="form-check-label">Активна акція</label>
+            </div>
+        </div>
+    </div>
+
+    <hr class="border-secondary my-4" />
+    <h2 class="h6 text-info">Товари в акції</h2>
+
+    @for (var i = 0; i < Model.ProductLines.Count; i++)
+    {
+        <div class="row g-2 align-items-end mb-2 admin-promo-line">
+            <input type="hidden" asp-for="ProductLines[i].PromotionProductId" />
+            <input type="hidden" asp-for="ProductLines[i].ProductId" />
+            <input type="hidden" asp-for="ProductLines[i].ProductName" />
+            <input type="hidden" asp-for="ProductLines[i].UnitPrice" />
+            <div class="col-md-5">
+                <label class="small text-white-50">Товар</label>
+                <div class="form-control admin-readonly-label">@Model.ProductLines[i].ProductName</div>
+            </div>
+            <div class="col-md-2">
+                <label class="small text-white-50">Ціна</label>
+                <div class="form-control admin-readonly-label">@Model.ProductLines[i].UnitPrice.ToString("N2") ₴</div>
+            </div>
+            <div class="col-md-2">
+                <label class="small text-white-50">Знижка %</label>
+                <input asp-for="ProductLines[i].DiscountPercentage" type="number" step="0.01" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <label class="small text-white-50">Після знижки</label>
+                <div class="form-control admin-readonly-label">@Model.ProductLines[i].ResultPrice.ToString("N2") ₴</div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-check mt-4">
+                    <input asp-for="ProductLines[i].IsActive" class="form-check-input" />
+                    <label class="form-check-label small">У акції</label>
+                </div>
+            </div>
+            @if (Model.ProductLines[i].PromotionProductId.HasValue && Model.PromotionId.HasValue)
+            {
+                <div class="col-12 col-md-auto">
+                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                            formaction="@Url.Action("RemovePromotionProduct", new { promotionProductId = Model.ProductLines[i].PromotionProductId, promotionId = Model.PromotionId })"
+                            formmethod="post"
+                            onclick="return confirm('Прибрати товар з акції?')">
+                        <i class="bi bi-trash"></i> Прибрати
+                    </button>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="row g-2 align-items-end mt-3" id="newProductRow">
+        <div class="col-md-6">
+            <label class="small text-white-50">Додати один товар</label>
+            <select id="addProductSelect" class="form-select admin-select admin-select-product">
+                <option value="">— оберіть товар —</option>
+                @foreach (var p in Model.AvailableProducts)
+                {
+                    <option value="@p.Id" data-price="@p.Price" data-name="@p.Name">@p.Name — @p.Price.ToString("N2") ₴</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="small text-white-50">Знижка %</label>
+            <input type="number" id="addDiscount" value="10" min="1" max="90" step="0.01" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-outline-info w-100" id="addProductBtn"><i class="bi bi-plus"></i> Додати до списку</button>
+        </div>
+    </div>
+    <div id="dynamicLines"></div>
+
+    <button type="submit" class="btn btn-gt mt-4"><i class="bi bi-check-lg"></i> Зберегти акцію</button>
+    <a class="btn btn-outline-light mt-4 ms-2" asp-action="Promotions">Назад</a>
+</form>
+
+@if (Model.PromotionId.HasValue)
+{
+    <div class="admin-panel admin-form mt-4">
+        <h2 class="h6 text-info">Масове додавання товарів</h2>
+        <form asp-action="BulkAddPromotionProducts" method="post" class="row g-2 align-items-end">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="PromotionId" value="@Model.PromotionId" />
+            <div class="col-md-3">
+                <label class="small text-white-50">Категорія</label>
+                <select name="CategoryId" class="form-select admin-select">
+                    <option value="">— усі —</option>
+                    @foreach (var c in Model.Categories)
+                    {
+                        <option value="@c.Id">@c.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="small text-white-50">Бренд (постачальник)</label>
+                <select name="SupplierId" class="form-select admin-select">
+                    <option value="">— усі —</option>
+                    @foreach (var s in Model.Suppliers)
+                    {
+                        <option value="@s.Id">@s.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="small text-white-50">Сезон</label>
+                <select name="Season" class="form-select admin-select">
+                    <option value="">— усі —</option>
+                    @foreach (var s in Model.SeasonOptions)
+                    {
+                        <option value="@s.Value">@s.Label</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="small text-white-50">Знижка %</label>
+                <input type="number" name="DiscountPercent" value="10" min="1" max="90" step="0.01" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-outline-info w-100"><i class="bi bi-collection"></i> Додати</button>
+            </div>
+        </form>
+    </div>
+}
+
+@section Scripts {
+<script>
+(function () {
+    var lineIndex = @Model.ProductLines.Count;
+    var box = document.getElementById('dynamicLines');
+    document.getElementById('addProductBtn').addEventListener('click', function () {
+        var sel = document.getElementById('addProductSelect');
+        var opt = sel.options[sel.selectedIndex];
+        if (!opt || !opt.value) return;
+        var discount = document.getElementById('addDiscount').value || 10;
+        var price = parseFloat(opt.dataset.price) || 0;
+        var result = (price * (1 - discount / 100)).toFixed(2);
+        var row = document.createElement('div');
+        row.className = 'row g-2 align-items-end mb-2 admin-promo-line';
+        row.innerHTML =
+            '<input type="hidden" name="ProductLines[' + lineIndex + '].ProductId" value="' + opt.value + '" />' +
+            '<input type="hidden" name="ProductLines[' + lineIndex + '].ProductName" value="' + opt.dataset.name.replace(/"/g, '&quot;') + '" />' +
+            '<input type="hidden" name="ProductLines[' + lineIndex + '].UnitPrice" value="' + price + '" />' +
+            '<div class="col-md-5"><div class="form-control admin-readonly-label">' + opt.dataset.name + '</div></div>' +
+            '<div class="col-md-2"><div class="form-control admin-readonly-label">' + price.toFixed(2) + ' ₴</div></div>' +
+            '<div class="col-md-2"><input name="ProductLines[' + lineIndex + '].DiscountPercentage" type="number" step="0.01" class="form-control" value="' + discount + '" /></div>' +
+            '<div class="col-md-2"><div class="form-control admin-readonly-label">' + result + ' ₴</div></div>' +
+            '<div class="col-md-1"><input type="hidden" name="ProductLines[' + lineIndex + '].IsActive" value="true" /><span class="small text-white-50">Новий</span></div>';
+        box.appendChild(row);
+        lineIndex++;
+        sel.remove(sel.selectedIndex);
+        sel.selectedIndex = 0;
+    });
+})();
+</script>
+}

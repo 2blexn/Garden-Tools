@@ -1,0 +1,22 @@
+@model AdminDashboardViewModel
+@{ ViewData["Title"] = "Панель"; }
+<h1 class="admin-page-title">Панель керування</h1>
+
+<div class="admin-stat-grid">
+    <div class="admin-stat-card"><div class="label">Товари</div><div class="value">@Model.ProductCount</div></div>
+    <div class="admin-stat-card"><div class="label">Користувачі</div><div class="value">@Model.UserCount</div></div>
+    <div class="admin-stat-card"><div class="label">Замовлення</div><div class="value">@Model.OrderCount</div></div>
+    <div class="admin-stat-card"><div class="label">Відгуки на модерації</div><div class="value">@Model.PendingReviews</div></div>
+    <div class="admin-stat-card"><div class="label">Низький залишок</div><div class="value">@Model.LowStockCount</div></div>
+    <div class="admin-stat-card"><div class="label">Дохід 30 днів</div><div class="value">@Model.RevenueLast30Days.ToString("N0") ₴</div></div>
+</div>
+
+<div class="admin-panel">
+    <h2 class="h5 text-info mb-3">Швидкі дії</h2>
+    <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-gt btn-sm" asp-action="EditProduct"><i class="bi bi-plus-lg"></i> Новий товар</a>
+        <a class="btn btn-outline-info btn-sm" asp-action="EditPromotion"><i class="bi bi-tag"></i> Нова акція</a>
+        <a class="btn btn-outline-info btn-sm" asp-action="Reviews"><i class="bi bi-shield-check"></i> Модерація відгуків</a>
+        <a class="btn btn-outline-info btn-sm" asp-action="Analytics"><i class="bi bi-graph-up"></i> Аналітика</a>
+    </div>
+</div>

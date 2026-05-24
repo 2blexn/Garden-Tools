@@ -1,0 +1,47 @@
+@model GardenTolls.Web.ViewModels.Home.SearchSuggestionsViewModel
+@if (Model.Templates.Count > 0)
+{
+    <div class="gt-search-dropdown-group">
+        <div class="gt-search-dropdown-label">Підказки</div>
+        <ul class="gt-search-dropdown-list">
+            @foreach (var t in Model.Templates)
+            {
+                <li>
+                    <button type="button" class="gt-search-dropdown-item" role="menuitem" data-query="@t">@t</button>
+                </li>
+            }
+        </ul>
+    </div>
+}
+@if (Model.UserHistory.Count > 0)
+{
+    <div class="gt-search-dropdown-group">
+        <div class="gt-search-dropdown-label">Ваша історія</div>
+        <ul class="gt-search-dropdown-list">
+            @foreach (var q in Model.UserHistory)
+            {
+                <li>
+                    <button type="button" class="gt-search-dropdown-item" role="menuitem" data-query="@q">
+                        <i class="bi bi-clock-history me-2"></i>@q
+                    </button>
+                </li>
+            }
+        </ul>
+    </div>
+}
+@if (Model.PopularQueries.Count > 0)
+{
+    <div class="gt-search-dropdown-group">
+        <div class="gt-search-dropdown-label">Популярні запити</div>
+        <ul class="gt-search-dropdown-list">
+            @foreach (var q in Model.PopularQueries)
+            {
+                <li>
+                    <button type="button" class="gt-search-dropdown-item" role="menuitem" data-query="@q">
+                        <i class="bi bi-fire me-2"></i>@q
+                    </button>
+                </li>
+            }
+        </ul>
+    </div>
+}

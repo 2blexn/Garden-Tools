@@ -1,0 +1,65 @@
+@model OrderDetailsViewModel
+@{
+    ViewData["Title"] = $"Замовлення #{Model.OrderId}";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />
+}
+
+<div class="order-flow-page">
+    <nav aria-label="breadcrumb" class="order-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Orders" asp-action="History">Мої замовлення</a></li>
+            <li class="breadcrumb-item active">Замовлення #@Model.OrderId</li>
+        </ol>
+    </nav>
+
+    <h1 class="order-page-title">Замовлення #@Model.OrderId</h1>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="order-glass-panel">
+                <div class="success-details-grid mb-0" style="opacity:1;transform:none;">
+                    <div class="success-detail-block">
+                        <h3 class="order-section-title">Деталі</h3>
+                        <div class="success-detail-row"><span>Дата:</span><span>@Model.OrderDate.ToString("dd.MM.yyyy HH:mm")</span></div>
+                        <div class="success-detail-row"><span>Статус:</span><span>@Model.Status</span></div>
+                        <div class="success-detail-row"><span>Оплата:</span><span>@Model.PaymentMethod</span></div>
+                        <div class="success-detail-row"><span>Статус оплати:</span><span>@Model.PaymentStatus</span></div>
+                    </div>
+                    <div class="success-detail-block">
+                        <h3 class="order-section-title">Доставка</h3>
+                        <p class="text-white mb-1">@Model.CustomerName</p>
+                        <p class="text-white-50 small mb-0">@Model.ShippingAddress, @Model.ShippingCity, @Model.ShippingCountry</p>
+                    </div>
+                </div>
+
+                <hr class="order-divider" />
+                <h2 class="order-section-title">Товари</h2>
+                <ul class="order-items-list">
+                    @foreach (var l in Model.Lines)
+                    {
+                        <li class="order-item-row">
+                            <div class="order-item-info">
+                                <div class="order-item-name">@l.ProductName</div>
+                                <div class="order-item-meta">@l.Quantity × @l.UnitPrice.ToString("N2") грн</div>
+                            </div>
+                            <div class="order-item-total">@l.LineTotal.ToString("N2") грн</div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <aside class="order-glass-panel order-summary-panel">
+                <h2 class="order-summary-title">Разом</h2>
+                <div class="order-summary-total">
+                    <span class="label">До сплати:</span>
+                    <span class="value">@Model.TotalAmount.ToString("N2") грн</span>
+                </div>
+                <a asp-action="History" class="success-btn-outline w-100 mt-3 justify-content-center">← Всі замовлення</a>
+            </aside>
+        </div>
+    </div>
+</div>

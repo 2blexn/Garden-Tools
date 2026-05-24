@@ -1,0 +1,94 @@
+@model List<PromotionCardViewModel>
+@{
+    ViewData["Title"] = "Акції";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+}
+
+<div class="page-section">
+    <nav aria-label="breadcrumb" class="page-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item active">Акції</li>
+        </ol>
+    </nav>
+
+    <h1 class="page-title">Акції та знижки</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="page-glass page-empty">
+            <i class="bi bi-tag"></i>
+            <p class="mb-0">Наразі немає активних акцій. Загляньте пізніше!</p>
+        </div>
+    }
+    else
+    {
+        <div class="promo-grid">
+            @foreach (var p in Model)
+            {
+                <article class="promo-card">
+                    @if (p.IsCurrentlyActive && p.MaxDiscountPercent.HasValue)
+                    {
+                        <span class="promo-badge">До -@p.MaxDiscountPercent.Value.ToString("0")%</span>
+                    }
+                    else if (!p.IsCurrentlyActive)
+                    {
+                        <span class="promo-badge promo-badge--inactive">Завершена</span>
+                    }
+
+                    <h2 class="promo-title">@p.Name</h2>
+                    @if (p.IsNightFlash && p.IsCurrentlyActive)
+                    {
+                        <div class="promo-night-timer promo-night-timer--card" data-end="@p.EndDate.ToString("o")">
+                            <i class="bi bi-moon-stars"></i>
+                            <span>Залишилось:</span>
+                            <strong class="night-countdown">--:--:--</strong>
+                        </div>
+                    }
+                    <p class="promo-dates">
+                        @p.StartDate.ToString("dd.MM.yyyy") — @p.EndDate.ToString("dd.MM.yyyy")
+                    </p>
+                    @if (!string.IsNullOrWhiteSpace(p.Description))
+                    {
+                        <p class="promo-desc">@p.Description</p>
+                    }
+                    <p class="promo-meta">
+                        @if (!string.IsNullOrWhiteSpace(p.SupplierName))
+                        {
+                            <span><i class="bi bi-shop"></i> @p.SupplierName</span>
+                            <span class="mx-1">·</span>
+                        }
+                        <span><i class="bi bi-box"></i> @p.ProductCount товар(ів)</span>
+                    </p>
+                    <a class="promo-cta" asp-controller="Promotions" asp-action="Details" asp-route-id="@p.PromotionId">
+                        <i class="bi bi-arrow-right"></i> Товари акції
+                    </a>
+                </article>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            document.querySelectorAll('.promo-night-timer--card').forEach(function (host) {
+                var out = host.querySelector('.night-countdown');
+                if (!out) return;
+                var end = new Date(host.dataset.end).getTime();
+                function tick() {
+                    var diff = end - Date.now();
+                    if (diff <= 0) { out.textContent = '00:00:00'; return; }
+                    var h = Math.floor(diff / 3600000);
+                    var m = Math.floor((diff % 3600000) / 60000);
+                    var s = Math.floor((diff % 60000) / 1000);
+                    out.textContent = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+                }
+                tick();
+                setInterval(tick, 1000);
+            });
+        })();
+    </script>
+}

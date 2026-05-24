@@ -1,0 +1,127 @@
+@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Оформлення замовлення";
+    var subtotal = Model.Lines.Sum(l => l.LineTotal);
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />
+}
+
+<div class="order-flow-page">
+    <nav aria-label="breadcrumb" class="order-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Cart" asp-action="Index">Кошик</a></li>
+            <li class="breadcrumb-item active">Оформлення замовлення</li>
+        </ol>
+    </nav>
+
+    <h1 class="order-page-title">Оформлення замовлення</h1>
+
+    <form asp-action="Checkout" method="post" id="checkoutForm">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="TotalAmount" />
+
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-8">
+                <div class="order-glass-panel">
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                    <h2 class="order-section-title">Товари в замовленні</h2>
+                    <ul class="order-items-list">
+                        @foreach (var line in Model.Lines)
+                        {
+                            var img = !string.IsNullOrEmpty(line.ImageBase64)
+                                ? $"data:image/jpeg;base64,{line.ImageBase64}"
+                                : "/images/placeholder.svg";
+                            <li class="order-item-row">
+                                <img class="order-item-thumb" src="@img" alt="@line.ProductName"
+                                     onerror="this.src='/images/placeholder.svg'" />
+                                <div class="order-item-info">
+                                    <div class="order-item-name">@line.ProductName</div>
+                                    <div class="order-item-meta">Кількість: @line.Quantity × @line.UnitPrice.ToString("N2") грн</div>
+                                </div>
+                                <div class="order-item-total">@line.LineTotal.ToString("N2") грн</div>
+                            </li>
+                        }
+                    </ul>
+
+                    <hr class="order-divider" />
+
+                    <h2 class="order-section-title">Адреса доставки</h2>
+                    <div class="row g-3 mb-3">
+                        <div class="col-12">
+                            <label class="order-field-label" asp-for="ShippingAddress">Адреса <span class="required">*</span></label>
+                            <input asp-for="ShippingAddress" class="form-control order-input" placeholder="Вулиця, будинок, квартира" />
+                            <span asp-validation-for="ShippingAddress" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="order-field-label" asp-for="ShippingCity">Місто <span class="required">*</span></label>
+                            <input asp-for="ShippingCity" class="form-control order-input" />
+                            <span asp-validation-for="ShippingCity" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="order-field-label" asp-for="ShippingCountry">Країна <span class="required">*</span></label>
+                            <input asp-for="ShippingCountry" class="form-control order-input" />
+                            <span asp-validation-for="ShippingCountry" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="order-field-label" asp-for="ShippingPostalCode">Поштовий індекс</label>
+                            <input asp-for="ShippingPostalCode" class="form-control order-input" />
+                        </div>
+                    </div>
+
+                    <hr class="order-divider" />
+
+                    <h2 class="order-section-title">Спосіб оплати</h2>
+                    <div class="row g-3 mb-3">
+                        <div class="col-12">
+                            <label class="order-field-label" asp-for="PaymentMethod">Спосіб оплати <span class="required">*</span></label>
+                            <select asp-for="PaymentMethod" class="form-select order-select" id="paymentMethod">
+                                <option value="Card">Банківська карта</option>
+                                <option value="Cash">Готівка при отриманні</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="order-field-label" asp-for="Notes">Примітки до замовлення</label>
+                            <textarea asp-for="Notes" class="form-control order-textarea" rows="4" placeholder="Примітки до замовлення..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="order-submit-btn" id="checkoutSubmitBtn">
+                        Підтвердити замовлення
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <aside class="order-glass-panel order-summary-panel">
+                    <h2 class="order-summary-title">Сума замовлення</h2>
+                    <div class="order-summary-row">
+                        <span class="label">Вартість товарів:</span>
+                        <span class="value">@subtotal.ToString("N2") грн</span>
+                    </div>
+                    <div class="order-summary-row">
+                        <span class="label">Вартість доставки:</span>
+                        <span class="value">0.00 грн</span>
+                    </div>
+                    <hr class="order-divider" />
+                    <div class="order-summary-total">
+                        <span class="label">До сплати:</span>
+                        <span class="value">@subtotal.ToString("N2") грн</span>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('checkoutForm')?.addEventListener('submit', function () {
+            var btn = document.getElementById('checkoutSubmitBtn');
+            if (btn) { btn.disabled = true; btn.textContent = 'Обробка...'; }
+        });
+    </script>
+}

@@ -1,0 +1,45 @@
+@model List<AdminPromotionViewModel>
+@{ ViewData["Title"] = "Акції"; }
+<h1 class="admin-page-title">Акції <a class="btn btn-sm btn-gt" asp-action="EditPromotion"><i class="bi bi-plus-lg"></i> Створити</a></h1>
+
+<div class="admin-panel p-0 overflow-hidden">
+    <table class="table admin-table mb-0">
+        <thead>
+            <tr><th>ID</th><th>Назва</th><th>Постачальник</th><th>Період</th><th>Статус</th><th></th></tr>
+        </thead>
+        <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.PromotionId</td>
+                <td>@p.PromotionName</td>
+                <td>@p.SupplierName</td>
+                <td>@p.StartDate.ToString("dd.MM.yy") — @p.EndDate.ToString("dd.MM.yy")</td>
+                <td>
+                    @if (p.IsActive) { <span class="badge bg-success">Активна</span> }
+                    else { <span class="badge bg-secondary">Вимкнена</span> }
+                </td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-light" asp-action="EditPromotion" asp-route-id="@p.PromotionId">Редагувати</a>
+                    @if (p.IsActive)
+                    {
+                        <form asp-action="DisablePromotion" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="promotionId" value="@p.PromotionId" />
+                            <button type="submit" class="btn btn-sm btn-outline-warning">Вимкнути</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="EnablePromotion" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="promotionId" value="@p.PromotionId" />
+                            <button type="submit" class="btn btn-sm btn-outline-success">Увімкнути</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,115 @@
+@model ProductCardViewModel
+@inject GardenTolls.Web.Services.ICartService CartService
+@{
+    var wishlist = ViewBag.WishlistIds as List<int> ?? [];
+    var cartIds = CartService.GetCartProductIds(Context.Session);
+    var inWishlist = wishlist.Contains(Model.ProductId);
+    var inCart = cartIds.Contains(Model.ProductId);
+    var returnUrl = $"{Context.Request.Path}{Context.Request.QueryString}";
+    var imgSrc = !string.IsNullOrEmpty(Model.ImageBase64)
+        ? $"data:image/jpeg;base64,{Model.ImageBase64}"
+        : "/images/placeholder.svg";
+    var filledStars = Model.AverageRating.HasValue ? (int)Math.Round(Model.AverageRating.Value) : 0;
+    var isCatalog = string.Equals(ViewData["CardVariant"] as string, "catalog", StringComparison.OrdinalIgnoreCase);
+    var promoId = ViewBag.PromoId as int?;
+}
+
+@if (isCatalog)
+{
+    <article class="catalog-card">
+        @if (Model.DiscountPercent is > 0)
+        {
+            <span class="catalog-card-discount">-@Model.DiscountPercent%</span>
+        }
+
+        <div class="catalog-card-image-wrap">
+            <form asp-controller="Cart" asp-action="ToggleWishlist" method="post" class="m-0">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="productId" value="@Model.ProductId" />
+                <input type="hidden" name="returnUrl" value="@returnUrl" />
+                <button type="submit" class="catalog-wishlist-btn @(inWishlist ? "active" : "")" title="Список бажань" aria-label="Додати в обране">
+                    <i class="bi @(inWishlist ? "bi-heart-fill" : "bi-heart")"></i>
+                </button>
+            </form>
+            <a class="catalog-card-image-link" asp-controller="Products" asp-action="Details" asp-route-id="@Model.ProductId" asp-route-promoId="@promoId">
+                <img src="@imgSrc" alt="@Model.Name" class="catalog-card-image" onerror="this.src='/images/placeholder.svg'" />
+            </a>
+        </div>
+
+        <div class="catalog-card-body">
+            <div class="catalog-card-category">@Model.CategoryName</div>
+            <a class="catalog-card-title" asp-controller="Products" asp-action="Details" asp-route-id="@Model.ProductId" asp-route-promoId="@promoId">@Model.Name</a>
+
+            <div class="catalog-card-rating">
+                @for (var s = 1; s <= 5; s++)
+                {
+                    <span class="catalog-card-stars">@(s <= filledStars ? "★" : "☆")</span>
+                }
+                <span class="catalog-card-rating-text">
+                    @(Model.AverageRating.HasValue ? Model.AverageRating.Value.ToString("0.0") : "Немає оцінок")
+                </span>
+            </div>
+
+            <p class="catalog-card-desc">@(string.IsNullOrWhiteSpace(Model.Description) ? "Опис товару відсутній" : Model.Description)</p>
+
+            <div class="catalog-card-price">
+                @if (Model.DiscountedPrice.HasValue)
+                {
+                    <span class="catalog-card-price-old">@Model.UnitPrice.ToString("N2") грн</span>
+                    <span>@Model.DiscountedPrice.Value.ToString("N2") грн</span>
+                }
+                else
+                {
+                    <span>@Model.DisplayPrice.ToString("N2") грн</span>
+                }
+            </div>
+
+            <form asp-controller="Cart" asp-action="ToggleCart" method="post" class="m-0">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="productId" value="@Model.ProductId" />
+                <input type="hidden" name="returnUrl" value="@returnUrl" />
+                <button type="submit" class="catalog-add-cart-btn @(inCart ? "catalog-add-cart-btn--in-cart" : "")" @(!Model.CanAddToCart ? "disabled" : null)>
+                    <i class="bi @(inCart ? "bi-cart-check-fill" : "bi-cart3")"></i> @(inCart ? "В кошику" : "До кошика")
+                </button>
+            </form>
+        </div>
+    </article>
+}
+else
+{
+    <div class="card product-card glass-card text-white h-100">
+        <a class="product-card-link-area" asp-controller="Products" asp-action="Details" asp-route-id="@Model.ProductId">
+            <img src="@imgSrc" alt="@Model.Name" class="product-thumb" onerror="this.src='/images/placeholder.svg'" />
+            <div class="card-body pb-2">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="small mb-1 text-white-50">@Model.CategoryName · @Model.SupplierName</p>
+                @if (Model.AverageRating.HasValue)
+                {
+                    <p class="rating-stars small mb-2">★ @Model.AverageRating.Value.ToString("0.0")</p>
+                }
+                <div class="mb-0">
+                    @if (Model.DiscountedPrice.HasValue)
+                    {
+                        <span class="price-old">@Model.UnitPrice.ToString("N2") ₴</span>
+                        <span class="price-sale ms-2">@Model.DiscountedPrice.Value.ToString("N2") ₴</span>
+                    }
+                    else
+                    {
+                        <span class="price-sale">@Model.UnitPrice.ToString("N2") ₴</span>
+                    }
+                </div>
+            </div>
+        </a>
+        <div class="card-body pt-0 product-card-actions">
+            <div class="d-flex gap-2 flex-wrap">
+                <a class="btn btn-sm btn-gt" asp-controller="Products" asp-action="Details" asp-route-id="@Model.ProductId">Деталі</a>
+                <form asp-controller="Cart" asp-action="ToggleCart" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="productId" value="@Model.ProductId" />
+                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+                    <button type="submit" class="btn btn-sm @(inCart ? "btn-gt" : "btn-outline-light")" @(!Model.CanAddToCart ? "disabled" : null)>@(inCart ? "В кошику" : "В кошик")</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}

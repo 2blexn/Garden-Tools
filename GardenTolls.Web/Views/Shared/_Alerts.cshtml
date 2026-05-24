@@ -1,0 +1,16 @@
+@if (TempData["Success"] != null)
+{
+    <div class="gt-toast gt-toast--success" role="alert" data-auto-dismiss="10000">
+        <i class="bi bi-check-circle-fill gt-toast-icon"></i>
+        <span class="gt-toast-text">@TempData["Success"]</span>
+        <button type="button" class="gt-toast-close" aria-label="Закрити">&times;</button>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="gt-toast gt-toast--error" role="alert" data-auto-dismiss="10000">
+        <i class="bi bi-exclamation-circle-fill gt-toast-icon"></i>
+        <span class="gt-toast-text">@TempData["Error"]</span>
+        <button type="button" class="gt-toast-close" aria-label="Закрити">&times;</button>
+    </div>
+}

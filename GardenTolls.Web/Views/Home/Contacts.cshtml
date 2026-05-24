@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "Контакти";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+}
+
+<div class="page-section">
+    <nav aria-label="breadcrumb" class="page-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item active">Контакти</li>
+        </ol>
+    </nav>
+
+    <div class="contacts-grid">
+        <div class="page-glass">
+            <p class="contacts-block-label">Де нас знайти</p>
+            <h1 class="contacts-block-title">Контакти</h1>
+
+            <div class="contact-item">
+                <div class="contact-item-icon"><i class="bi bi-envelope"></i></div>
+                <div>
+                    <div class="contact-item-label">Email</div>
+                    <a href="mailto:info@gardentools.ua" class="contact-item-value">info@gardentools.ua</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon"><i class="bi bi-telephone"></i></div>
+                <div>
+                    <div class="contact-item-label">Телефон</div>
+                    <a href="tel:+380440000000" class="contact-item-value">+380 44 000 00 00</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon"><i class="bi bi-geo-alt"></i></div>
+                <div>
+                    <div class="contact-item-label">Адреса</div>
+                    <span class="contact-item-value">м. Київ, вул. Садова, 1</span>
+                </div>
+            </div>
+            <div class="contact-item mb-0">
+                <div class="contact-item-icon"><i class="bi bi-clock"></i></div>
+                <div>
+                    <div class="contact-item-label">Графік</div>
+                    <span class="contact-item-value">Пн–Пт: 9:00 – 18:00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-glass contacts-form">
+            <p class="contacts-block-label">Зворотний зв'язок</p>
+            <h2 class="contacts-block-title" style="font-size:1.35rem;">Залишити заявку</h2>
+
+            <form method="post" asp-action="Contacts" class="d-flex flex-column gap-3">
+                @Html.AntiForgeryToken()
+                <div>
+                    <label class="order-field-label">Ваше ім'я <span class="text-info">*</span></label>
+                    <input name="name" type="text" class="order-input" placeholder="Іван Петренко" required />
+                </div>
+                <div>
+                    <label class="order-field-label">Телефон <span class="text-info">*</span></label>
+                    <input name="phone" type="tel" class="order-input" placeholder="+380 XX XXX XX XX" required />
+                </div>
+                <div>
+                    <label class="order-field-label">Email</label>
+                    <input name="email" type="email" class="order-input" placeholder="your@email.com" />
+                </div>
+                <div>
+                    <label class="order-field-label">Повідомлення</label>
+                    <textarea name="message" class="order-input" rows="4" placeholder="Опишіть ваш запит..."></textarea>
+                </div>
+                <button type="submit" class="order-submit-btn">Надіслати заявку</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body class="admin-shell">
+<nav class="navbar navbar-dark gt-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+            <i class="bi bi-flower1"></i> Garden Tools Admin
+        </a>
+        <a class="btn btn-sm btn-outline-light rounded-pill" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="bi bi-box-arrow-up-right"></i> На сайт
+        </a>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row g-0">
+        <aside class="col-md-3 col-lg-2 admin-sidebar">
+            <nav class="nav flex-column">
+                @{
+                    string Active(string action) => ViewContext.RouteData.Values["action"]?.ToString() == action ? "active" : "";
+                    var act = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+                    string ActiveCat() => act is "Categories" or "EditCategory" ? "active" : "";
+                }
+                <a class="nav-link @Active("Index")" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="bi bi-speedometer2"></i> Панель</a>
+                <a class="nav-link @Active("Products")" asp-area="Admin" asp-controller="Dashboard" asp-action="Products"><i class="bi bi-box-seam"></i> Товари</a>
+                <a class="nav-link @ActiveCat()" asp-area="Admin" asp-controller="Dashboard" asp-action="Categories"><i class="bi bi-folder2"></i> Категорії</a>
+                <a class="nav-link @Active("Users")" asp-area="Admin" asp-controller="Dashboard" asp-action="Users"><i class="bi bi-people"></i> Користувачі</a>
+                <a class="nav-link @Active("Orders")" asp-area="Admin" asp-controller="Dashboard" asp-action="Orders"><i class="bi bi-receipt"></i> Замовлення</a>
+                <a class="nav-link @Active("Reviews")" asp-area="Admin" asp-controller="Dashboard" asp-action="Reviews"><i class="bi bi-chat-square-text"></i> Відгуки</a>
+                <a class="nav-link @Active("Promotions")" asp-area="Admin" asp-controller="Dashboard" asp-action="Promotions"><i class="bi bi-tag"></i> Акції</a>
+                <a class="nav-link @Active("EditPromotion")" asp-area="Admin" asp-controller="Dashboard" asp-action="EditPromotion"><i class="bi bi-plus-circle"></i> Нова акція</a>
+                <a class="nav-link @Active("Analytics")" asp-area="Admin" asp-controller="Dashboard" asp-action="Analytics"><i class="bi bi-graph-up"></i> Аналітика</a>
+            </nav>
+        </aside>
+        <main class="col-md-9 col-lg-10 admin-main">
+            <div class="gt-toast-stack" aria-live="polite">
+                <partial name="_Alerts" />
+            </div>
+            @RenderBody()
+        </main>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

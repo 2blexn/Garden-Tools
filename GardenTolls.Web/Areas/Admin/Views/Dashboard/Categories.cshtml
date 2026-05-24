@@ -1,0 +1,67 @@
+@model List<AdminCategoryViewModel>
+@{ ViewData["Title"] = "Категорії"; }
+<h1 class="admin-page-title">
+    Категорії
+    <a class="btn btn-sm btn-gt" asp-action="EditCategory"><i class="bi bi-plus-lg"></i> Створити</a>
+</h1>
+
+<div class="admin-panel p-0 overflow-hidden">
+    <table class="table admin-table mb-0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Опис</th>
+                <th>Товарів</th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.CategoryId</td>
+                <td>@c.Name</td>
+                <td class="text-white-50 small">@(c.Description ?? "—")</td>
+                <td>@c.ProductCount</td>
+                <td>
+                    @if (c.IsActive)
+                    {
+                        <span class="badge bg-success">Видима</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Прихована</span>
+                    }
+                </td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-light" asp-action="EditCategory" asp-route-id="@c.CategoryId">Редагувати</a>
+                    @if (c.IsActive)
+                    {
+                        <form asp-action="HideCategory" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="categoryId" value="@c.CategoryId" />
+                            <button type="submit" class="btn btn-sm btn-outline-info">Приховати</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="ShowCategory" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="categoryId" value="@c.CategoryId" />
+                            <button type="submit" class="btn btn-sm btn-outline-success">Показати</button>
+                        </form>
+                    }
+                    <form asp-action="DeleteCategory" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@c.CategoryId" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Видалити категорію? Якщо є товари — буде прихована.')">×</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

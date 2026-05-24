@@ -1,0 +1,54 @@
+@model List<AdminUserViewModel>
+@{ ViewData["Title"] = "Користувачі"; }
+<h1 class="admin-page-title">Користувачі</h1>
+
+<div class="admin-panel p-0 overflow-hidden">
+    <table class="table admin-table mb-0">
+        <thead>
+            <tr><th></th><th>Ім'я</th><th>Email</th><th>Роль</th><th>Відгуки</th><th>Статус</th><th></th></tr>
+        </thead>
+        <tbody>
+        @foreach (var u in Model)
+        {
+            var avatar = !string.IsNullOrEmpty(u.ProfileImageBase64) ? $"data:image/jpeg;base64,{u.ProfileImageBase64}" : null;
+            <tr>
+                <td>
+                    @if (avatar != null) { <img src="@avatar" class="admin-avatar" alt="" /> }
+                    else { <span class="admin-avatar-placeholder">@u.AuthorInitial</span> }
+                </td>
+                <td>
+                    <strong>@u.DisplayName</strong><br />
+                    <span class="small text-white-50">@@@u.Username</span>
+                </td>
+                <td>@u.Email</td>
+                <td>@u.Role</td>
+                <td>
+                    @if (u.CanWriteReviews)
+                    {
+                        <span class="badge bg-success">Дозволено</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Обмежено</span>
+                    }
+                </td>
+                <td>@(u.IsActive ? "Активний" : "Заблокований")</td>
+                <td class="text-nowrap">
+                    <form asp-action="SetUserActive" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="userId" value="@u.UserId" />
+                        <input type="hidden" name="isActive" value="@(!u.IsActive ? "true" : "false")" />
+                        <button class="btn btn-sm btn-outline-warning">@(u.IsActive ? "Блок" : "Розблок")</button>
+                    </form>
+                    <form asp-action="SetUserCanWriteReviews" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="userId" value="@u.UserId" />
+                        <input type="hidden" name="canWrite" value="@(!u.CanWriteReviews ? "true" : "false")" />
+                        <button class="btn btn-sm btn-outline-info">@(u.CanWriteReviews ? "Заборона відгуків" : "Дозволити відгуки")</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

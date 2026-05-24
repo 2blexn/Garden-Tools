@@ -1,0 +1,147 @@
+@model PaymentViewModel
+@{
+    ViewData["Title"] = "Оплата";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />
+}
+
+<div class="order-flow-page">
+    <nav aria-label="breadcrumb" class="order-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Cart" asp-action="Index">Кошик</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Orders" asp-action="Checkout">Оформлення</a></li>
+            <li class="breadcrumb-item active">Оплата</li>
+        </ol>
+    </nav>
+
+    <h1 class="order-page-title">Оплата замоалення</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="order-glass-panel">
+                <p class="text-white-50 mb-1">Замовлення <strong class="text-white">#@Model.OrderId</strong></p>
+                <p class="mb-4">Сума до сплати: <strong class="text-info fs-4">@Model.Amount.ToString("N2") грн</strong></p>
+
+                <div class="payment-card-preview" id="cardPreview">
+                    <div class="payment-card-chip"></div>
+                    <div class="payment-card-number-display" id="cardNumberDisplay">•••• •••• •••• ••••</div>
+                    <div class="payment-card-meta">
+                        <span id="cardHolderDisplay">ВЛАСНИК КАРТКИ</span>
+                        <span id="cardExpiryDisplay">MM/YY</span>
+                    </div>
+                </div>
+
+                <form asp-action="Payment" method="post" id="paymentForm">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="OrderId" />
+                    <input type="hidden" asp-for="Amount" />
+
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label class="order-field-label">Номер картки <span class="required">*</span></label>
+                        <input asp-for="CardNumber" class="form-control order-input" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="cc-number" />
+                        <span asp-validation-for="CardNumber" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="order-field-label">Власник картки <span class="required">*</span></label>
+                        <input asp-for="CardHolder" class="form-control order-input" id="cardHolder" placeholder="IVAN IVANOV" autocomplete="cc-name" />
+                        <span asp-validation-for="CardHolder" class="text-danger small"></span>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <label class="order-field-label">Термін <span class="required">*</span></label>
+                            <input asp-for="Expiry" class="form-control order-input" id="cardExpiry" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp" />
+                            <span asp-validation-for="Expiry" class="text-danger small"></span>
+                        </div>
+                        <div class="col-6">
+                            <label class="order-field-label">CVV <span class="required">*</span></label>
+                            <input asp-for="Cvv" class="form-control order-input" id="cardCvv" placeholder="•••" maxlength="4" autocomplete="cc-csc" />
+                            <span asp-validation-for="Cvv" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="order-submit-btn" id="payBtn">
+                        <i class="bi bi-credit-card me-1"></i> Оплатити
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="payment-overlay" id="paymentOverlay" aria-hidden="true">
+    <div class="payment-process-box">
+        <div class="payment-spinner"></div>
+        <p class="payment-step-text" id="paymentStepText">Перевірка даних картки...</p>
+        <div class="payment-steps-dots">
+            <span class="active" id="dot1"></span>
+            <span id="dot2"></span>
+            <span id="dot3"></span>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            var numInput = document.getElementById('cardNumber');
+            var holderInput = document.getElementById('cardHolder');
+            var expiryInput = document.getElementById('cardExpiry');
+            var numDisplay = document.getElementById('cardNumberDisplay');
+            var holderDisplay = document.getElementById('cardHolderDisplay');
+            var expiryDisplay = document.getElementById('cardExpiryDisplay');
+
+            numInput?.addEventListener('input', function () {
+                var v = this.value.replace(/\D/g, '').slice(0, 16);
+                this.value = v.replace(/(.{4})/g, '$1 ').trim();
+                numDisplay.textContent = v.length
+                    ? v.replace(/(.{4})/g, '$1 ').trim()
+                    : '•••• •••• •••• ••••';
+            });
+
+            holderInput?.addEventListener('input', function () {
+                holderDisplay.textContent = this.value.toUpperCase() || 'ВЛАСНИК КАРТКИ';
+            });
+
+            expiryInput?.addEventListener('input', function () {
+                var v = this.value.replace(/\D/g, '').slice(0, 4);
+                if (v.length >= 3) v = v.slice(0, 2) + '/' + v.slice(2);
+                this.value = v;
+                expiryDisplay.textContent = v || 'MM/YY';
+            });
+
+            var form = document.getElementById('paymentForm');
+            var overlay = document.getElementById('paymentOverlay');
+            var stepText = document.getElementById('paymentStepText');
+            var steps = ['Перевірка даних картки...', 'Зв\'язок з банком...', 'Підтвердження платежу...'];
+            var dots = [document.getElementById('dot1'), document.getElementById('dot2'), document.getElementById('dot3')];
+
+            form?.addEventListener('submit', function (e) {
+                if (form.dataset.animating === '1') return;
+                if (!form.checkValidity()) return;
+
+                e.preventDefault();
+                form.dataset.animating = '1';
+                document.getElementById('payBtn').disabled = true;
+                overlay.classList.add('active');
+
+                var step = 0;
+                function nextStep() {
+                    if (step < steps.length) {
+                        stepText.textContent = steps[step];
+                        dots.forEach(function (d, i) { d?.classList.toggle('active', i <= step); });
+                        step++;
+                        setTimeout(nextStep, 900);
+                    } else {
+                        form.submit();
+                    }
+                }
+                nextStep();
+            });
+        })();
+    </script>
+}

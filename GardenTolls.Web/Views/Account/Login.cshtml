@@ -1,0 +1,60 @@
+@model LoginViewModel
+@{ ViewData["Title"] = "Вхід"; }
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+}
+
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-icon-wrap">
+            <i class="bi bi-lock-fill"></i>
+        </div>
+        <h1 class="auth-title">Вхід в систему</h1>
+
+        <form asp-action="Login" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="ReturnUrl" />
+
+            <div asp-validation-summary="ModelOnly" class="auth-field-error mb-3"></div>
+
+            <div class="auth-field">
+                <label class="auth-field-label" asp-for="Email">Email <span class="req">*</span></label>
+                <input asp-for="Email" class="auth-input" placeholder="your@email.com" autocomplete="email" />
+                <span asp-validation-for="Email" class="auth-field-error"></span>
+            </div>
+
+            <div class="auth-field">
+                <label class="auth-field-label" asp-for="Password">Пароль <span class="req">*</span></label>
+                <div class="auth-input-wrap">
+                    <input asp-for="Password" class="auth-input" id="loginPassword" placeholder="••••••••" autocomplete="current-password" />
+                    <button type="button" class="toggle-pwd" data-target="loginPassword" aria-label="Показати пароль">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+                <span asp-validation-for="Password" class="auth-field-error"></span>
+            </div>
+
+            <button type="submit" class="auth-submit">Увійти</button>
+
+            <div class="auth-footer-row">
+                <a class="auth-link" asp-action="ForgotPassword">Забули пароль?</a>
+                <span class="text-white-50">Немає облікового запису? <a class="auth-link" asp-action="Register">Зареєструватися</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelectorAll('.toggle-pwd').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var input = document.getElementById(btn.dataset.target);
+                if (!input) return;
+                var isPwd = input.type === 'password';
+                input.type = isPwd ? 'text' : 'password';
+                btn.querySelector('i').className = isPwd ? 'bi bi-eye-slash' : 'bi bi-eye';
+            });
+        });
+    </script>
+}

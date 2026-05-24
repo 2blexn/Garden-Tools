@@ -1,0 +1,40 @@
+@model AdminCategoryViewModel
+@{ ViewData["Title"] = Model.CategoryId.HasValue ? "Редагування категорії" : "Нова категорія"; }
+<h1 class="admin-page-title">@ViewData["Title"]</h1>
+
+<form asp-action="EditCategory" method="post" class="admin-panel admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="CategoryId" />
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label>Назва</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label>Батьківська категорія</label>
+            <select asp-for="ParentCategoryId" class="form-select admin-select">
+                <option value="">— без батьківської —</option>
+                @foreach (var p in Model.ParentCategories)
+                {
+                    <option value="@p.Id">@p.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-12">
+            <label>Опис</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label class="form-check-label">Видима в каталозі</label>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-gt mt-4"><i class="bi bi-check-lg"></i> Зберегти</button>
+    <a class="btn btn-outline-light mt-4 ms-2" asp-action="Categories">Назад</a>
+</form>

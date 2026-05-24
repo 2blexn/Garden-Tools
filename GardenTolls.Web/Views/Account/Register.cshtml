@@ -1,0 +1,173 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Реєстрація";
+    var initialStep = ViewBag.RegisterStep as int? ?? 1;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+}
+
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-icon-wrap">
+            <i class="bi bi-person-plus-fill"></i>
+        </div>
+        <h1 class="auth-title">Реєстрація</h1>
+
+        <div class="auth-stepper" id="registerStepper">
+            <div class="auth-step @(initialStep >= 1 ? "active" : "")" data-step="1">
+                <div class="auth-step-circle" id="stepCircle1">1</div>
+                <span class="auth-step-label">Облікові дані</span>
+            </div>
+            <div class="auth-step-line @(initialStep >= 2 ? "filled" : "")" id="stepLine"></div>
+            <div class="auth-step @(initialStep >= 2 ? "active" : "")" data-step="2">
+                <div class="auth-step-circle" id="stepCircle2">2</div>
+                <span class="auth-step-label">Особиста інформація</span>
+            </div>
+        </div>
+
+        <form asp-action="Register" method="post" id="registerForm" novalidate>
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="auth-field-error mb-3"></div>
+
+            <div class="auth-step-panel @(initialStep == 1 ? "active" : "")" id="panel1">
+                <div class="auth-field">
+                    <label class="auth-field-label" asp-for="Username">Ім'я користувача <span class="req">*</span></label>
+                    <input asp-for="Username" class="auth-input" />
+                    <span asp-validation-for="Username" class="auth-field-error"></span>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-field-label" asp-for="Email">Email <span class="req">*</span></label>
+                    <input asp-for="Email" class="auth-input" autocomplete="email" />
+                    <span asp-validation-for="Email" class="auth-field-error"></span>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-field-label" asp-for="Password">Пароль <span class="req">*</span></label>
+                    <div class="auth-input-wrap">
+                        <input asp-for="Password" class="auth-input" id="regPassword" autocomplete="new-password" />
+                        <button type="button" class="toggle-pwd" data-target="regPassword" aria-label="Показати пароль">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="Password" class="auth-field-error"></span>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-field-label" asp-for="ConfirmPassword">Підтвердження пароля <span class="req">*</span></label>
+                    <div class="auth-input-wrap">
+                        <input asp-for="ConfirmPassword" class="auth-input" id="regConfirmPassword" autocomplete="new-password" />
+                        <button type="button" class="toggle-pwd" data-target="regConfirmPassword" aria-label="Показати пароль">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="ConfirmPassword" class="auth-field-error"></span>
+                </div>
+            </div>
+
+            <div class="auth-step-panel @(initialStep == 2 ? "active" : "")" id="panel2">
+                <div class="auth-field">
+                    <label class="auth-field-label" asp-for="FirstName">Ім'я <span class="req">*</span></label>
+                    <input asp-for="FirstName" class="auth-input" autocomplete="given-name" />
+                    <span class="auth-field-hint">Заповніть ваше ім'я</span>
+                    <span asp-validation-for="FirstName" class="auth-field-error"></span>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-field-label" asp-for="LastName">Прізвище <span class="req">*</span></label>
+                    <input asp-for="LastName" class="auth-input" autocomplete="family-name" />
+                    <span class="auth-field-hint">Заповніть ваше прізвище</span>
+                    <span asp-validation-for="LastName" class="auth-field-error"></span>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-field-label" asp-for="Phone">Телефон <span class="req">*</span></label>
+                    <input asp-for="Phone" class="auth-input" placeholder="+380XXXXXXXXX" autocomplete="tel" />
+                    <span class="auth-field-hint">Введіть номер телефону у форматі +380XXXXXXXXX</span>
+                    <span asp-validation-for="Phone" class="auth-field-error"></span>
+                </div>
+            </div>
+
+            <div class="auth-nav-row">
+                <button type="button" class="auth-btn-back" id="btnBack" disabled>Назад</button>
+                <button type="button" class="auth-btn-next" id="btnNext">Далі</button>
+                <button type="submit" class="auth-btn-next d-none" id="btnSubmit">Зареєструватися</button>
+            </div>
+
+            <div class="auth-register-footer">
+                Вже маєте обліковий запис? <a class="auth-link" asp-action="Login">Увійти</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            var step = @initialStep;
+            var panel1 = document.getElementById('panel1');
+            var panel2 = document.getElementById('panel2');
+            var btnBack = document.getElementById('btnBack');
+            var btnNext = document.getElementById('btnNext');
+            var btnSubmit = document.getElementById('btnSubmit');
+            var step1El = document.querySelector('.auth-step[data-step="1"]');
+            var step2El = document.querySelector('.auth-step[data-step="2"]');
+            var stepLine = document.getElementById('stepLine');
+            var circle1 = document.getElementById('stepCircle1');
+            var circle2 = document.getElementById('stepCircle2');
+
+            function showStep(n) {
+                step = n;
+                panel1.classList.toggle('active', n === 1);
+                panel2.classList.toggle('active', n === 2);
+                btnBack.disabled = n === 1;
+                btnNext.classList.toggle('d-none', n === 2);
+                btnSubmit.classList.toggle('d-none', n !== 2);
+                step1El.classList.toggle('active', n === 1);
+                step1El.classList.toggle('done', n === 2);
+                step2El.classList.toggle('active', n === 2);
+                stepLine.classList.toggle('filled', n === 2);
+                circle1.innerHTML = n === 2 ? '<i class="bi bi-check"></i>' : '1';
+            }
+
+            function validatePanel1() {
+                var ok = true;
+                ['Username', 'Email', 'Password', 'ConfirmPassword'].forEach(function (name) {
+                    var el = document.querySelector('[name="' + name + '"]');
+                    if (!el || !el.value.trim()) ok = false;
+                });
+                var pwd = document.querySelector('[name="Password"]');
+                var cpwd = document.querySelector('[name="ConfirmPassword"]');
+                if (pwd && cpwd && pwd.value !== cpwd.value) ok = false;
+                return ok;
+            }
+
+            btnNext.addEventListener('click', function () {
+                if (step === 1) {
+                    if (typeof $ !== 'undefined' && $.validator) {
+                        var form = $('#registerForm');
+                        var valid = true;
+                        ['Username', 'Email', 'Password', 'ConfirmPassword'].forEach(function (n) {
+                            if (!form.validate().element('[name="' + n + '"]')) valid = false;
+                        });
+                        if (!valid) return;
+                    } else if (!validatePanel1()) return;
+                    showStep(2);
+                }
+            });
+
+            btnBack.addEventListener('click', function () {
+                if (step === 2) showStep(1);
+            });
+
+            document.querySelectorAll('.toggle-pwd').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var input = document.getElementById(btn.dataset.target);
+                    if (!input) return;
+                    var isPwd = input.type === 'password';
+                    input.type = isPwd ? 'text' : 'password';
+                    btn.querySelector('i').className = isPwd ? 'bi bi-eye-slash' : 'bi bi-eye';
+                });
+            });
+
+            showStep(step);
+        })();
+    </script>
+}

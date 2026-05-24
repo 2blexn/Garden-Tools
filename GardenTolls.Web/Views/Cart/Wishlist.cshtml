@@ -1,0 +1,39 @@
+@model WishlistViewModel
+@{
+    ViewData["Title"] = "Список бажань";
+    var wishlist = ViewBag.WishlistIds as List<int> ?? [];
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/catalog.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+}
+
+<div class="catalog-page page-section">
+    <nav aria-label="breadcrumb" class="page-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item active">Список бажань</li>
+        </ol>
+    </nav>
+
+    <h1 class="page-title">Список бажань</h1>
+
+    @if (!Model.Items.Any())
+    {
+        <div class="page-glass page-empty">
+            <i class="bi bi-heart"></i>
+            <p class="mb-3">Список порожній. Додайте товари з каталогу.</p>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-gt">Перейти до каталогу</a>
+        </div>
+    }
+    else
+    {
+        <div class="catalog-grid">
+            @foreach (var p in Model.Items)
+            {
+                ViewData["CardVariant"] = "catalog";
+                <partial name="_ProductCard" model="p" />
+            }
+        </div>
+    }
+</div>

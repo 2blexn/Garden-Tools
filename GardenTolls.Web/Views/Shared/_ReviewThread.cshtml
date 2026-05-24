@@ -1,0 +1,81 @@
+@model ReviewViewModel
+@{
+    var stars = Model.Rating ?? 0;
+    var isReply = Model.Rating is null or 0;
+    var productId = ViewBag.ProductId as int? ?? 0;
+    var promoId = ViewBag.PromoId as int?;
+    var isAuthenticated = ViewBag.IsReviewAuthenticated as bool? ?? false;
+    var avatarSrc = !string.IsNullOrEmpty(Model.ProfileImageBase64)
+        ? $"data:image/jpeg;base64,{Model.ProfileImageBase64}"
+        : null;
+}
+
+<article class="review-card @(isReply ? "review-card--reply" : "")">
+    <div class="review-card-header">
+        @if (avatarSrc != null)
+        {
+            <img src="@avatarSrc" alt="" class="review-avatar review-avatar--img" />
+        }
+        else
+        {
+            <div class="review-avatar">@Model.AuthorInitial</div>
+        }
+        <div>
+            <div class="review-author-row">
+                <span class="review-author-name">@Model.Author</span>
+                @if (Model.IsVerifiedPurchase)
+                {
+                    <i class="bi bi-patch-check-fill review-verified" title="Підтверджена покупка"></i>
+                }
+            </div>
+            <time class="review-date" datetime="@Model.ReviewDate.ToString("o")">@FormatReviewDateTime(Model.ReviewDate)</time>
+        </div>
+    </div>
+
+    @if (stars > 0)
+    {
+        <div class="review-stars-row" aria-label="Оцінка @stars з 5">
+            @for (var s = 1; s <= 5; s++)
+            {
+                @(s <= stars ? "★" : "☆")
+            }
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Comment))
+    {
+        <p class="review-text">@Model.Comment</p>
+    }
+
+    @if (isAuthenticated)
+    {
+        <button type="button" class="review-reply-toggle" data-reply-for="@Model.ReviewId">
+            <i class="bi bi-reply"></i> Відповісти
+        </button>
+
+        <form asp-controller="Products" asp-action="AddReview" method="post" class="review-reply-form d-none" id="replyForm-@Model.ReviewId">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@productId" />
+            <input type="hidden" name="newReview.ParentReviewId" value="@Model.ReviewId" />
+            @if (promoId.HasValue)
+            {
+                <input type="hidden" name="promoId" value="@promoId" />
+            }
+            <textarea name="newReview.Comment" class="form-control review-form-textarea" rows="3" placeholder="Напишіть вашу відповідь..." required></textarea>
+            <div class="review-reply-actions">
+                <button type="submit" class="review-submit-btn review-submit-btn--sm">Відправити</button>
+                <button type="button" class="review-cancel-btn" data-cancel-reply="@Model.ReviewId">Скасувати</button>
+            </div>
+        </form>
+    }
+
+    @if (Model.Replies.Any())
+    {
+        <div class="review-replies">
+            @foreach (var reply in Model.Replies)
+            {
+                <partial name="_ReviewThread" model="reply" />
+            }
+        </div>
+    }
+</article>

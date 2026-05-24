@@ -1,0 +1,179 @@
+@model ProductListViewModel
+@{
+    ViewData["Title"] = "Каталог";
+    var sortOption = Model.Filter.SortBy switch
+    {
+        "price" => Model.Filter.SortDesc ? "price-desc" : "price-asc",
+        _ => Model.Filter.SortDesc ? "name-desc" : "name-asc"
+    };
+    var maxPriceUi = Model.Filter.MaxPrice ?? 5000;
+    var minPriceUi = Model.Filter.MinPrice ?? 0;
+    var expandAdvanced = Model.Filter.SupplierId.HasValue || !string.IsNullOrWhiteSpace(Model.Filter.Season);
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/catalog.css" asp-append-version="true" />
+}
+
+<div class="catalog-page">
+    <form method="get" id="catalogForm">
+        <div class="catalog-toolbar catalog-toolbar-row">
+            <div class="catalog-toolbar-search">
+                <div class="catalog-search-wrap">
+                    <i class="bi bi-search"></i>
+                    <input asp-for="Filter.Search" class="catalog-search-input" placeholder="Пошук товарів..." />
+                </div>
+            </div>
+            <div class="catalog-toolbar-sort">
+                <label class="catalog-sort-label"><i class="bi bi-sort-down"></i> Сортування</label>
+                <select name="sortOption" class="catalog-sort-select" onchange="document.getElementById('catalogForm').submit()">
+                    <option value="name-asc" selected="@(sortOption == "name-asc")">Назва (А-Я)</option>
+                    <option value="name-desc" selected="@(sortOption == "name-desc")">Назва (Я-А)</option>
+                    <option value="price-asc" selected="@(sortOption == "price-asc")">Ціна (від низької)</option>
+                    <option value="price-desc" selected="@(sortOption == "price-desc")">Ціна (від високої)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="catalog-layout">
+            <aside class="catalog-sidebar">
+                <div class="catalog-filters-panel">
+                    <div class="catalog-filters-title">
+                        <i class="bi bi-list"></i> Фільтри
+                    </div>
+
+                    <label class="catalog-filter-label">Категорія</label>
+                    <select asp-for="Filter.CategoryId" class="form-select catalog-filter-select" onchange="this.form.submit()">
+                        <option value="">Усі категорії</option>
+                        @foreach (var c in Model.Categories)
+                        {
+                            <option value="@c.Id">@c.Name</option>
+                        }
+                    </select>
+
+                    <details class="catalog-filters-advanced" @(expandAdvanced ? "open" : null)>
+                        <summary>Бренд і сезон</summary>
+                        <div class="catalog-filters-advanced-body">
+                            <label class="catalog-filter-label">Бренд / постачальник</label>
+                            <select asp-for="Filter.SupplierId" class="form-select catalog-filter-select" onchange="this.form.submit()">
+                                <option value="">Усі бренди</option>
+                                @foreach (var s in Model.Suppliers)
+                                {
+                                    <option value="@s.Id">@s.Name</option>
+                                }
+                            </select>
+
+                            <label class="catalog-filter-label mt-2">Сезон</label>
+                            <select asp-for="Filter.Season" class="form-select catalog-filter-select" onchange="this.form.submit()">
+                                <option value="">Усі сезони</option>
+                                @foreach (var opt in SeasonFilter.Options)
+                                {
+                                    <option value="@opt.Value">@opt.Label</option>
+                                }
+                            </select>
+                        </div>
+                    </details>
+
+                    <label class="catalog-filter-label mt-3">Ціна</label>
+                    <input type="range" class="catalog-price-slider" min="0" max="5000" step="50"
+                           value="@maxPriceUi" id="priceSlider"
+                           onchange="document.getElementById('maxPriceInput').value=this.value; document.getElementById('catalogForm').submit()" />
+                    <input type="hidden" asp-for="Filter.MinPrice" id="minPriceInput" value="@minPriceUi" />
+                    <input type="hidden" asp-for="Filter.MaxPrice" id="maxPriceInput" value="@maxPriceUi" />
+                    <div class="catalog-price-labels">
+                        <span>0 грн</span>
+                        <span id="maxPriceLabel">@maxPriceUi грн</span>
+                    </div>
+
+                    <input type="hidden" asp-for="Filter.Page" value="1" />
+                    <a asp-action="Index" class="catalog-reset-btn d-block text-center text-decoration-none">Скинути фільтри</a>
+                </div>
+            </aside>
+
+            <div class="catalog-main">
+                <div class="catalog-mobile-filters catalog-filters-panel mb-3">
+                    <label class="catalog-filter-label">Категорія</label>
+                    <select asp-for="Filter.CategoryId" class="form-select catalog-filter-select" onchange="this.form.submit()">
+                        <option value="">Усі категорії</option>
+                        @foreach (var c in Model.Categories)
+                        {
+                            <option value="@c.Id">@c.Name</option>
+                        }
+                    </select>
+                    <details class="catalog-filters-advanced" @(expandAdvanced ? "open" : null)>
+                        <summary>Бренд і сезон</summary>
+                        <div class="catalog-filters-advanced-body">
+                            <label class="catalog-filter-label">Бренд</label>
+                            <select asp-for="Filter.SupplierId" class="form-select catalog-filter-select" onchange="this.form.submit()">
+                                <option value="">Усі</option>
+                                @foreach (var s in Model.Suppliers)
+                                {
+                                    <option value="@s.Id">@s.Name</option>
+                                }
+                            </select>
+                            <label class="catalog-filter-label mt-2">Сезон</label>
+                            <select asp-for="Filter.Season" class="form-select catalog-filter-select" onchange="this.form.submit()">
+                                <option value="">Усі</option>
+                                @foreach (var opt in SeasonFilter.Options)
+                                {
+                                    <option value="@opt.Value">@opt.Label</option>
+                                }
+                            </select>
+                        </div>
+                    </details>
+                </div>
+
+                @if (!Model.Products.Any())
+                {
+                    <div class="alert alert-info" style="background:rgba(127,255,212,0.1);border-color:rgba(127,255,212,0.3);color:#7fffd4;">
+                        Товари не знайдено. Спробуйте змінити параметри пошуку.
+                    </div>
+                }
+                else
+                {
+                    <div class="catalog-grid">
+                        @foreach (var p in Model.Products)
+                        {
+                            ViewData["CardVariant"] = "catalog";
+                            <div class="catalog-grid-col">
+                                <partial name="_ProductCard" model="p" />
+                            </div>
+                        }
+                    </div>
+
+                    @if (Model.TotalPages > 1)
+                    {
+                        <nav class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                @for (var i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    <li class="page-item @(Model.Filter.Page == i ? "active" : "")">
+                                        <a class="page-link bg-dark border-secondary text-info"
+                                           asp-action="Index"
+                                           asp-route-Page="@i"
+                                           asp-route-Search="@Model.Filter.Search"
+                                           asp-route-CategoryId="@Model.Filter.CategoryId"
+                                           asp-route-SupplierId="@Model.Filter.SupplierId"
+                                           asp-route-Season="@Model.Filter.Season"
+                                           asp-route-MinPrice="@Model.Filter.MinPrice"
+                                           asp-route-MaxPrice="@Model.Filter.MaxPrice"
+                                           asp-route-sortOption="@sortOption">@i</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    }
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('priceSlider')?.addEventListener('input', function () {
+            var v = this.value;
+            document.getElementById('maxPriceInput').value = v;
+            document.getElementById('maxPriceLabel').textContent = v + ' грн';
+        });
+    </script>
+}

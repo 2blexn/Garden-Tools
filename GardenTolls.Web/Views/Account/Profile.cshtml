@@ -1,0 +1,151 @@
+@model ProfileEditViewModel
+@{
+    ViewData["Title"] = "Мій профіль";
+    var initial = !string.IsNullOrWhiteSpace(Model.FirstName)
+        ? Model.FirstName![0].ToString().ToUpperInvariant()
+        : (!string.IsNullOrWhiteSpace(Model.Username) ? Model.Username[0].ToString().ToUpperInvariant() : "К");
+    var avatarSrc = !string.IsNullOrEmpty(Model.ProfileImageBase64)
+        ? $"data:image/jpeg;base64,{Model.ProfileImageBase64}"
+        : null;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/site-pages.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+}
+
+<div class="page-section profile-page-wrap">
+    <nav aria-label="breadcrumb" class="page-breadcrumb profile-breadcrumb">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Головна</a></li>
+            <li class="breadcrumb-item active">Мій профіль</li>
+        </ol>
+    </nav>
+
+    <div class="profile-center-card page-glass">
+        <div class="profile-header">
+            <div class="profile-avatar-wrap">
+                @if (avatarSrc != null)
+                {
+                    <img src="@avatarSrc" alt="Фото профілю" class="profile-avatar-img" id="profileAvatarPreview" />
+                }
+                else
+                {
+                    <div class="profile-avatar-placeholder" id="profileAvatarPreview">@initial</div>
+                }
+            </div>
+            <div class="text-center text-md-start">
+                <h1 class="page-title mb-1" style="font-size:1.75rem;">Мій профіль</h1>
+                <p class="text-white-50 mb-0">Оновіть дані та фото профілю</p>
+            </div>
+        </div>
+
+        <form asp-action="Profile" method="post" enctype="multipart/form-data" class="profile-form-grid" id="profileForm">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="UserId" />
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label class="order-field-label">Фото профілю</label>
+                <input type="file" name="profileImage" accept="image/*" class="form-control" id="profileImageInput" />
+                <div class="form-check mt-2">
+                    <input class="form-check-input" asp-for="RemoveProfileImage" type="checkbox" id="removeProfileImage" />
+                    <label class="form-check-label text-white-50" for="removeProfileImage">Видалити поточне фото</label>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="Username" class="order-field-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Email" class="order-field-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="FirstName" class="order-field-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="LastName" class="order-field-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Phone" class="order-field-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label asp-for="Address" class="order-field-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="City" class="form-control" placeholder="Місто" />
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="Country" class="form-control" placeholder="Країна" />
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="PostalCode" class="form-control" placeholder="Індекс" />
+                </div>
+            </div>
+
+            <hr class="border-secondary my-4" />
+            <h5 class="text-info mb-3">Зміна пароля</h5>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <input asp-for="CurrentPassword" class="form-control" placeholder="Поточний пароль" />
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="NewPassword" class="form-control" placeholder="Новий пароль" />
+                </div>
+                <div class="col-md-4">
+                    <input asp-for="ConfirmNewPassword" class="form-control" placeholder="Підтвердження" />
+                </div>
+            </div>
+
+            <div class="profile-save-wrap">
+                <button type="submit" class="profile-save-btn" id="profileSaveBtn">
+                    <span class="profile-save-btn__text"><i class="bi bi-check2-circle"></i> Зберегти зміни</span>
+                    <span class="profile-save-btn__spinner" aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            var input = document.getElementById('profileImageInput');
+            var preview = document.getElementById('profileAvatarPreview');
+            if (input && preview) {
+                input.addEventListener('change', function () {
+                    var file = input.files && input.files[0];
+                    if (!file) return;
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        if (preview.tagName === 'IMG') {
+                            preview.src = e.target.result;
+                        } else {
+                            var img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.className = 'profile-avatar-img';
+                            img.id = 'profileAvatarPreview';
+                            preview.replaceWith(img);
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            var form = document.getElementById('profileForm');
+            var btn = document.getElementById('profileSaveBtn');
+            if (form && btn) {
+                form.addEventListener('submit', function () {
+                    btn.classList.add('is-saving');
+                    btn.disabled = true;
+                });
+            }
+        })();
+    </script>
+}
